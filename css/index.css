@@ -80,6 +80,7 @@ header {
     font-weight: 600;
     font-size: 15px;
     letter-spacing: -0.3px;
+    margin-top: 48px;
 }
 
 /* body */
@@ -91,13 +92,14 @@ header {
 
 .day__item {
     float: left;
+    position: relative;
     width: 440px;
     height: 589px;
     border: 1px solid rgb(143, 190, 135);
     background: white;
     justify-content: center;
     align-items: center;
-    overflow: auto;
+    overflow: hidden;
 }
 
 .top {
@@ -218,10 +220,6 @@ img {
     font-weight: 600;
 }
 
-.hidden {
-    display: none;
-}
-
 /* 수정 버튼 클릭 시 보이는 text 박스 */
 .plan-title__input {
     width: 355px;
@@ -262,10 +260,6 @@ img {
     margin-right: 21px;
 }
 
-.hidden {
-    display: none;
-}
-
 /* 수정 버튼 클릭 시 나타나는 확인 버튼 */
 .buttons-edit {
     display: inline-block;
@@ -291,10 +285,6 @@ img {
     padding: 7px 0;
     color: gray;
     word-break: break-word;
-}
-
-.hidden {
-    display: none;
 }
 
 .feedback {
@@ -337,14 +327,14 @@ img {
 .title {
     width: 438px;
     position: absolute;
-    bottom: 50px;
+    bottom: 0;
     padding-bottom: 20px;
     height: 50px;
     background: rgb(184, 219, 163);
     transition: all ease .3s 0s;
 }
 
-.title .active {
+.title.active {
     bottom: 100px;
     transition: all ease .3s 0s;
 }
@@ -358,21 +348,14 @@ img {
     opacity: 0.93;
 }
 
-img {
+.slide__image {
     width: 24px;
     height: 26px;
     padding-bottom: 1px;
     background: rgb(250, 255, 246);
     border: 1px solid rgb(143, 190, 135);
-}
-
-.up__image,
-.down__image {
     display: inline;
-}
-
-.hidden {
-    display: none;
+    left: 12.5px;
 }
 
 .option__button:hover {
@@ -406,7 +389,7 @@ img {
     transition: all ease .3s 0s;
 }
 
-.detail .active {
+.detail.active {
     bottom: 0px;
     display: inline-block;
     transition: all ease .3s 0s;
@@ -457,9 +440,9 @@ label {
     cursor: pointer;
 }
 
-label.hidden {
+/* label .hidden {
     display: none;
-}
+} */
 
 label:hover {
     opacity: 1;
@@ -477,14 +460,12 @@ label:hover {
     cursor: pointer;
 }
 
-.sentence__button:hover {
+/* .sentence__button:hover {
     opacity: 1;
-    /* img {
-        opacity: 1;
-    } */
-}
+} */
 
-img {
+.gray__button,
+.color__button {
     position: relative;
     top: 5.5px;
     width: 20px;
@@ -495,10 +476,6 @@ img {
 
 img:hover {
     opacity: 1;
-}
-
-.hidden {
-    display: none;
 }
 
 button {
