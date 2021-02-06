@@ -211,12 +211,12 @@ img {
     font-size: 14px;
 }
 
-.plan-title__span .completed {
+.plan-title__span.completed {
     color: rgb(201, 201, 201);
     text-decoration: line-through;
 }
 
-.plan-title__span .important {
+.plan-title__span.important {
     font-weight: 600;
 }
 
@@ -229,7 +229,7 @@ img {
     display: none;
 }
 
-.plan-title__input .active {
+.plan-title__input.active {
     display: inline-block;
 }
 
