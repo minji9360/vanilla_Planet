@@ -179,9 +179,9 @@ header {
     display: inline-block;
 }
 
-.buttons-default {
+/* .buttons-default {
     display: inline-block;
-}
+} */
 
 /* 버튼용 이미지 */
 .plan-check__button,
@@ -251,13 +251,31 @@ img {
 
 /* 수정 버튼 클릭 전 기본 버튼 */
 .buttons-default {
+    margin: auto;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position: absolute;
     display: none;
     margin-right: 21px;
 }
 
+.buttons-default input[type="image"] {
+    width: 15px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    opacity: 0.83;
+}
+
+input[type="image"]:hover {
+    opacity: 1;
+}
+
 .edit__button,
 .add-feedback__button {
-    margin-right: 21px;
+    right: 4px;
 }
 
 /* 수정 버튼 클릭 시 나타나는 확인 버튼 */
