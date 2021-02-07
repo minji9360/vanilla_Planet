@@ -186,15 +186,13 @@ function paintToDo(title, content, important) {
 	const editBtn = document.createElement("input");
 	const delBtn = document.createElement("input");
 	const span = document.createElement("span");
-	const newId = toDos[toDos.length - 1] ? toDos[toDos.length - 1].id + 1 : 0;
 
 	li.classList.add("plan");
-	buttons.classList.add("buttons-default");
 	checkBtn.classList.add("plan-check__button");
+	buttons.classList.add("buttons-default");
 	editBtn.classList.add("edit__button");
 	delBtn.classList.add("remove__button");
 	span.classList.add("plan-title__span");
-	console.log(important);
 	if (important == "true") {
 		checkBtn.src =
 			"data:image/png;base64,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";
@@ -212,8 +210,14 @@ function paintToDo(title, content, important) {
 	delBtn.src =
 		"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iNDgiIGhlaWdodD0iNDgiCnZpZXdCb3g9IjAgMCAxNzIgMTcyIgpzdHlsZT0iIGZpbGw6IzAwMDAwMDsiPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1kYXNoYXJyYXk9IiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIGZvbnQtZmFtaWx5PSJub25lIiBmb250LXdlaWdodD0ibm9uZSIgZm9udC1zaXplPSJub25lIiB0ZXh0LWFuY2hvcj0ibm9uZSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOiBub3JtYWwiPjxwYXRoIGQ9Ik0wLDE3MnYtMTcyaDE3MnYxNzJ6IiBmaWxsPSJub25lIj48L3BhdGg+PHBhdGggZD0iTTg1LjE0LDg2Ljg2di0xLjcyaDEuNzJ2MS43MnoiIGZpbGw9IiNjY2NjY2MiPjwvcGF0aD48ZyBmaWxsPSIjYmMxMjAwIj48cGF0aCBkPSJNNjkuMTQ0LDEuNzJsLTguNDI4LDguNDI4aC0zMy43MTJjLTUuMDU2OCwwIC04LjQyOCwzLjM3MTIgLTguNDI4LDguNDI4YzAsNS4wNTY4IDMuMzcxMiw4LjQyOCA4LjQyOCw4LjQyOGgxNi44NTZoODQuMjhoMTYuODU2YzUuMDU2OCwwIDguNDI4LC0zLjM3MTIgOC40MjgsLTguNDI4YzAsLTUuMDU2OCAtMy4zNzEyLC04LjQyOCAtOC40MjgsLTguNDI4aC0zMy43MTJsLTguNDI4LC04LjQyOHpNMjcuMDA0LDQzLjg2djEwOS41NjRjMCw5LjI3MDggNy41ODUyLDE2Ljg1NiAxNi44NTYsMTYuODU2aDg0LjI4YzkuMjcwOCwwIDE2Ljg1NiwtNy41ODUyIDE2Ljg1NiwtMTYuODU2di0xMDkuNTY0ek02MC43MTYsNjAuNzE2YzUuMDU2OCwwIDguNDI4LDMuMzcxMiA4LjQyOCw4LjQyOHY3NS44NTJjMCw1LjA1NjggLTMuMzcxMiw4LjQyOCAtOC40MjgsOC40MjhjLTUuMDU2OCwwIC04LjQyOCwtMy4zNzEyIC04LjQyOCwtOC40Mjh2LTc1Ljg1MmMwLC01LjA1NjggMy4zNzEyLC04LjQyOCA4LjQyOCwtOC40Mjh6TTExMS4yODQsNjAuNzE2YzUuMDU2OCwwIDguNDI4LDMuMzcxMiA4LjQyOCw4LjQyOHY3NS44NTJjMCw1LjA1NjggLTMuMzcxMiw4LjQyOCAtOC40MjgsOC40MjhjLTUuMDU2OCwwIC04LjQyOCwtMy4zNzEyIC04LjQyOCwtOC40Mjh2LTc1Ljg1MmMwLC01LjA1NjggMy4zNzEyLC04LjQyOCA4LjQyOCwtOC40Mjh6Ij48L3BhdGg+PC9nPjwvZz48L3N2Zz4=";
 	delBtn.type = "image";
+	checkBtn.addEventListener("click", (event) => {
+		checkPlan(1, event);
+	});
 	delBtn.addEventListener("click", (event) => {
-		deleteToDo(1, event);
+		deletePlan(1, event);
+	});
+	editBtn.addEventListener("click", (event) => {
+		// deletePlan(1, event);
 	});
 
 	toDoList1.appendChild(li);
@@ -222,7 +226,11 @@ function paintToDo(title, content, important) {
 	li.appendChild(buttons);
 	buttons.appendChild(editBtn);
 	buttons.appendChild(delBtn);
-	li.id = newId;
+	li.id = id;
+}
+
+function addPlan(title, content, important) {
+	const newId = toDos[toDos.length - 1] ? toDos[toDos.length - 1].id + 1 : 0;
 	const toDoObj = {
 		id: newId,
 		title: title,
@@ -233,9 +241,10 @@ function paintToDo(title, content, important) {
 	};
 	toDos.push(toDoObj);
 	saveToDos();
+	paintPlan(newId, title, content, important, false);
 }
 
-function deleteToDo(_i, event) {
+function deletePlan(_i, event) {
 	const btn = event.target;
 	const li = btn.parentNode.parentNode;
 	toDoList1.removeChild(li);
@@ -256,14 +265,14 @@ const TODOS_LS = "toDos";
 let toDos = [];
 
 /* submit */
-function planAddSubmit(i, event) {
+function handleAddSubmit(i, event) {
 	// const addForm = document.querySelector("#addForm" + index);
 	event.preventDefault();
 	const currentPlanTitleValue = document.querySelector("#titleInput" + i).value;
 	const currentPlanContentValue = document.querySelector("#contentInput" + i)
 		.value;
 	const currentImportantValue = document.querySelector("#important" + i).value;
-	paintToDo(
+	addPlan(
 		currentPlanTitleValue,
 		currentPlanContentValue,
 		currentImportantValue
@@ -275,9 +284,28 @@ function saveToDos() {
 	localStorage.setItem(TODOS_LS, JSON.stringify(toDos));
 }
 
+function loadToDos() {
+	const loadedToDos = localStorage.getItem(TODOS_LS);
+	if (loadedToDos !== null) {
+		const parsedToDos = JSON.parse(loadedToDos);
+		parsedToDos.forEach(function (toDo) {
+			paintPlan(
+				toDo.id,
+				toDo.title,
+				toDo.content,
+				toDo.important,
+				toDo.complete
+			);
+			console.log(toDo.id);
+		});
+	}
+	// }
+}
+
 function init() {
+	loadToDos();
 	addButton1.addEventListener("click", (event) => {
-		planAddSubmit(1, event);
+		handleAddSubmit(1, event);
 	});
 }
 
