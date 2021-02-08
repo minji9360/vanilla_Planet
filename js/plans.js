@@ -179,7 +179,67 @@ function clickSlide(index) {
 	todolist.classList.toggle("content");
 }
 
-function paintToDo(title, content, important) {
+function checkPlan(i, event) {
+	// 동일한 아이디의 할 일 찾기
+	// complete이 true이면 checkBtn Green으로 변경, span에 .completed 추가
+	// complete가 false면 checkBtn Red로 변경, span에 .completed 삭제
+	const btn = event.target;
+	const li = btn.parentNode;
+	// console.log(toDoObj);
+	// console.log(JSON.parse(localStorage.getItem("toDos"))[0].id);
+	const loadedToDos = localStorage.getItem(TODOS_LS);
+	const parsedToDos = JSON.parse(loadedToDos);
+	const noneCheckToDos = toDos.filter(function (toDo) {
+		return toDo.id !== parseInt(li.id);
+	});
+	// const checkToDos = toDos.filter(function (toDo) {
+	// 	return toDo.id == parseInt(li.id);
+	// });
+	// let checkToDos = toDos.find((item) => item[toDo.id].id == 1);
+	// console.log(checkToDos);
+	// // checkToDos.complete = true;
+	// toDos = noneCheckToDos;
+	// toDos.push(checkToDos);
+	// console.log(toDos);
+	// console.log(checkToDos);
+	// saveToDos();
+	let PLAN = [];
+
+	if (li.classList.contains("completed")) {
+		li.classList.remove("completed");
+		btn.src =
+			"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iNDgiIGhlaWdodD0iNDgiCnZpZXdCb3g9IjAgMCAxNzIgMTcyIgpzdHlsZT0iIGZpbGw6IzAwMDAwMDsiPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1kYXNoYXJyYXk9IiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIGZvbnQtZmFtaWx5PSJub25lIiBmb250LXdlaWdodD0ibm9uZSIgZm9udC1zaXplPSJub25lIiB0ZXh0LWFuY2hvcj0ibm9uZSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOiBub3JtYWwiPjxwYXRoIGQ9Ik0wLDE3MnYtMTcyaDE3MnYxNzJ6IiBmaWxsPSJub25lIj48L3BhdGg+PHBhdGggZD0iTTg1LjE0LDg2Ljg2di0xLjcyaDEuNzJ2MS43MnoiIGZpbGw9IiNjY2NjY2MiPjwvcGF0aD48ZyBmaWxsPSIjZDhkOGQ4Ij48cGF0aCBkPSJNMTUwLjIxMzMzLDE2OC41NmgtMTI4LjQyNjY3Yy0xMC4wOTA2NywwIC0xOC4zNDY2NywtOC4yNTYgLTE4LjM0NjY3LC0xOC4zNDY2N3YtMTI4LjQyNjY3YzAsLTEwLjA5MDY3IDguMjU2LC0xOC4zNDY2NyAxOC4zNDY2NywtMTguMzQ2NjdoMTI4LjQyNjY3YzEwLjA5MDY3LDAgMTguMzQ2NjcsOC4yNTYgMTguMzQ2NjcsMTguMzQ2Njd2MTI4LjQyNjY3YzAsMTAuMDkwNjcgLTguMjU2LDE4LjM0NjY3IC0xOC4zNDY2NywxOC4zNDY2N3oiPjwvcGF0aD48L2c+PC9nPjwvc3ZnPg==";
+		parsedToDos.forEach(function (toDo) {
+			if (li.id == toDo.id) {
+				toDo.complete = false;
+				PLAN = toDo;
+				// localStorage.removeItem(toDo);
+				// localStorage.push(PLAN);
+				// console.log(PLAN);
+				console.log(toDo);
+			}
+		});
+	} else {
+		li.classList.add("completed");
+		btn.src =
+			"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iNDgiIGhlaWdodD0iNDgiCnZpZXdCb3g9IjAgMCAxNzIgMTcyIgpzdHlsZT0iIGZpbGw6IzAwMDAwMDsiPjxnIHRyYW5zZm9ybT0iIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9Im5vbnplcm8iIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZWNhcD0iYnV0dCIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBzdHJva2UtZGFzaGFycmF5PSIiIHN0cm9rZS1kYXNob2Zmc2V0PSIwIiBmb250LWZhbWlseT0ibm9uZSIgZm9udC13ZWlnaHQ9Im5vbmUiIGZvbnQtc2l6ZT0ibm9uZSIgdGV4dC1hbmNob3I9Im5vbmUiIHN0eWxlPSJtaXgtYmxlbmQtbW9kZTogbm9ybWFsIj48cGF0aCBkPSJNMCwxNzJ2LTE3MmgxNzJ2MTcyeiIgZmlsbD0ibm9uZSI+PC9wYXRoPjxwYXRoIGQ9Ik04NS4xNCw4Ni44NnYtMS43MmgxLjcydjEuNzJ6IiBmaWxsPSIjY2NjY2NjIj48L3BhdGg+PHBhdGggZD0iIiBmaWxsPSJub25lIj48L3BhdGg+PGcgZmlsbD0iIzNlYWM0OSI+PHBhdGggZD0iTTc2LjgyNjY3LDEyNi40OTEwOWwtNDMuMTc4ODgsLTQzLjE3ODg4bDEyLjk3MTA5LC0xMi45NzEwOWwzMC4yMDc3OSwzMC4yMDc3OWw4OC43NTIsLTg4Ljc1MmMtMy4yNzQ4OCwtNS4wMTc4MSAtOC45MjU2NSwtOC4zNTY5MSAtMTUuMzY1MzMsLTguMzU2OTFoLTEyOC40MjY2N2MtMTAuMTM2NTMsMCAtMTguMzQ2NjcsOC4yMTAxMyAtMTguMzQ2NjcsMTguMzQ2Njd2MTI4LjQyNjY3YzAsMTAuMTM2NTMgOC4yMTAxMywxOC4zNDY2NyAxOC4zNDY2NywxOC4zNDY2N2gxMjguNDI2NjdjMTAuMTM2NTMsMCAxOC4zNDY2NywtOC4yMTAxMyAxOC4zNDY2NywtMTguMzQ2Njd2LTExNS40NTU1N3oiPjwvcGF0aD48L2c+PC9nPjwvZz48L3N2Zz4=";
+		parsedToDos.forEach(function (toDo) {
+			// console.log(toDo.id == id);
+			if (li.id == toDo.id) {
+				toDo.complete = true;
+				PLAN = toDo;
+				// localStorage.removeItem(toDo);
+				// localStorage.push(PLAN);
+				console.log(toDo);
+			}
+		});
+	}
+	// console.log(JSON.stringify(toDos));
+	saveToDos();
+	// console.log(JSON.stringify(toDos));
+}
+
+function paintPlan(id, title, content, important) {
 	const li = document.createElement("li");
 	const checkBtn = document.createElement("input");
 	const buttons = document.createElement("div");
@@ -289,14 +349,16 @@ function loadToDos() {
 	if (loadedToDos !== null) {
 		const parsedToDos = JSON.parse(loadedToDos);
 		parsedToDos.forEach(function (toDo) {
-			paintPlan(
-				toDo.id,
-				toDo.title,
-				toDo.content,
-				toDo.important,
-				toDo.complete
-			);
-			console.log(toDo.id);
+			if (toDo != null) {
+				paintPlan(
+					toDo.id,
+					toDo.title,
+					toDo.content,
+					toDo.important,
+					toDo.complete
+				);
+				console.log(toDo);
+			}
 		});
 	}
 	// }
