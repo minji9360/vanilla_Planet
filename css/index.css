@@ -211,7 +211,7 @@ img {
     font-size: 14px;
 }
 
-.plan.completed .plan-title__span {
+.plan-title__span.completed {
     color: rgb(201, 201, 201);
     text-decoration: line-through;
 }
