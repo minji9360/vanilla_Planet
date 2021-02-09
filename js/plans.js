@@ -180,13 +180,8 @@ function clickSlide(index) {
 }
 
 function checkPlan(i, event) {
-	// 동일한 아이디의 할 일 찾기
-	// complete이 true이면 checkBtn Green으로 변경, span에 .completed 추가
-	// complete가 false면 checkBtn Red로 변경, span에 .completed 삭제
 	const btn = event.target;
 	const li = btn.parentNode;
-	const loadedToDos = localStorage.getItem(TODOS_LS);
-	const parsedToDos = JSON.parse(loadedToDos);
 	let checkToDos = parsedToDos.find(function (toDo) {
 		return toDo.id == parseInt(li.id);
 	});
@@ -195,7 +190,6 @@ function checkPlan(i, event) {
 		li.classList.remove("completed");
 		btn.src =
 			"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iNDgiIGhlaWdodD0iNDgiCnZpZXdCb3g9IjAgMCAxNzIgMTcyIgpzdHlsZT0iIGZpbGw6IzAwMDAwMDsiPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1kYXNoYXJyYXk9IiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIGZvbnQtZmFtaWx5PSJub25lIiBmb250LXdlaWdodD0ibm9uZSIgZm9udC1zaXplPSJub25lIiB0ZXh0LWFuY2hvcj0ibm9uZSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOiBub3JtYWwiPjxwYXRoIGQ9Ik0wLDE3MnYtMTcyaDE3MnYxNzJ6IiBmaWxsPSJub25lIj48L3BhdGg+PHBhdGggZD0iTTg1LjE0LDg2Ljg2di0xLjcyaDEuNzJ2MS43MnoiIGZpbGw9IiNjY2NjY2MiPjwvcGF0aD48ZyBmaWxsPSIjZDhkOGQ4Ij48cGF0aCBkPSJNMTUwLjIxMzMzLDE2OC41NmgtMTI4LjQyNjY3Yy0xMC4wOTA2NywwIC0xOC4zNDY2NywtOC4yNTYgLTE4LjM0NjY3LC0xOC4zNDY2N3YtMTI4LjQyNjY3YzAsLTEwLjA5MDY3IDguMjU2LC0xOC4zNDY2NyAxOC4zNDY2NywtMTguMzQ2NjdoMTI4LjQyNjY3YzEwLjA5MDY3LDAgMTguMzQ2NjcsOC4yNTYgMTguMzQ2NjcsMTguMzQ2Njd2MTI4LjQyNjY3YzAsMTAuMDkwNjcgLTguMjU2LDE4LjM0NjY3IC0xOC4zNDY2NywxOC4zNDY2N3oiPjwvcGF0aD48L2c+PC9nPjwvc3ZnPg==";
-
 		checkToDos.complete = false;
 	} else {
 		li.classList.add("completed");
@@ -205,9 +199,6 @@ function checkPlan(i, event) {
 		checkToDos.complete = true;
 	}
 	toDos.splice(checkToDos.id, 1, checkToDos);
-	toDos.sort(function (a, b) {
-		return a.id - b.id;
-	});
 	saveToDos();
 }
 
@@ -293,8 +284,13 @@ const toDoInput = addForm1.querySelector("input");
 const toDoTextarea = addForm1.querySelector("textarea");
 const toDoList1 = document.querySelector("#todolist" + 1);
 const TODOS_LS = "toDos";
+const loadedToDos = localStorage.getItem(TODOS_LS);
+const parsedToDos = JSON.parse(loadedToDos);
 
 let toDos = [];
+parsedToDos.forEach(function (toDo) {
+	toDos.push(toDo);
+});
 
 /* submit */
 function handleAddSubmit(i, event) {
@@ -317,7 +313,6 @@ function saveToDos() {
 }
 
 function loadToDos() {
-	const loadedToDos = localStorage.getItem(TODOS_LS);
 	if (loadedToDos !== null) {
 		const parsedToDos = JSON.parse(loadedToDos);
 		parsedToDos.forEach(function (toDo) {
@@ -337,15 +332,9 @@ function loadToDos() {
 }
 
 function init() {
-	const loadedToDos = localStorage.getItem(TODOS_LS);
-	const parsedToDos = JSON.parse(loadedToDos);
-	// localStorage.clear();
 	loadToDos();
 	addButton1.addEventListener("click", (event) => {
 		handleAddSubmit(1, event);
-	});
-	parsedToDos.forEach(function (toDo) {
-		toDos.push(toDo);
 	});
 }
 
