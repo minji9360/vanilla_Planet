@@ -251,11 +251,6 @@ img {
 
 /* 수정 버튼 클릭 전 기본 버튼 */
 .buttons-default {
-    margin: auto;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    position: absolute;
     display: none;
     margin-right: 21px;
 }
@@ -269,17 +264,21 @@ img {
     opacity: 0.83;
 }
 
+.hidden {
+    display: none;
+}
+
 input[type="image"]:hover {
     opacity: 1;
 }
 
 .edit__button,
 .add-feedback__button {
-    right: 4px;
+    margin-right: 21px;
 }
 
 /* 수정 버튼 클릭 시 나타나는 확인 버튼 */
-.buttons-edit {
+/* .buttons-edit {
     display: inline-block;
 }
 
@@ -289,7 +288,7 @@ input[type="image"]:hover {
     font-size: 13px;
     color: rgb(98, 150, 89);
     background-color: white;
-}
+} */
 
 .detail {
     background-color: rgba(241, 241, 241, 0.411);
