@@ -323,7 +323,7 @@ function addPlan(title, content, important) {
 
 function deletePlan(_i, event) {
 	const btn = event.target;
-	const li = btn.parentNode.parentNode;
+	const li = btn.parentNode.parentNode.parentNode.parentNode;
 	toDoList1.removeChild(li);
 	const cleanToDos = toDos.filter(function (toDo) {
 		return toDo.id !== parseInt(li.id);
