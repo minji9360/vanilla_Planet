@@ -282,7 +282,7 @@ function paintPlan(id, title, content, important, complete) {
 		deletePlan(1, event);
 	});
 	editBtn.addEventListener("click", (event) => {
-		// deletePlan(1, event);
+		clickEdit(1, event);
 	});
 
 	toDoList1.appendChild(li);
@@ -319,6 +319,18 @@ function addPlan(title, content, important) {
 	toDos.push(toDoObj);
 	saveToDos();
 	paintPlan(newId, title, content, important, false);
+}
+
+function loadPlan(i) {
+	// const
+}
+
+function clickEdit(_i, event) {
+	const downBtn = document.querySelector("#downImage" + _i);
+	const btn = event.target;
+
+	if (downBtn.classList.contains("hidden")) clickSlide(_i);
+	loadPlan(_i);
 }
 
 function deletePlan(_i, event) {
