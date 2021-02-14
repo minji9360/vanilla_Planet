@@ -93,7 +93,7 @@ header {
 .day__item {
     float: left;
     position: relative;
-    width: 440px;
+    width: 500px;
     height: 589px;
     border: 1px solid rgb(143, 190, 135);
     background: white;
@@ -106,7 +106,7 @@ header {
     padding: 18px 0;
     text-align: center;
     background: rgb(184, 219, 163);
-    height: 102px;
+    height: 82px;
 }
 
 .title__date {
@@ -114,7 +114,7 @@ header {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 2px;
-    margin: 3px 0;
+    margin: 10px 0;
     width: 100%;
     color: rgb(63, 63, 63);
 }
@@ -137,7 +137,7 @@ header {
 /* 할 일 리스트 출력 창 */
 .todolist {
     position: absolute;
-    width: 438px;
+    width: 500px;
     height: calc(
         100% - 102px - 50px
     ); /*전체 높이 - 상단 title 높이 - 하단 title 입력창 높이 */
@@ -342,7 +342,7 @@ img {
 
 /* add-form 내 */
 .title {
-    width: 448px;
+    width: 500px;
     position: absolute;
     bottom: 0;
     padding-bottom: 20px;
@@ -380,7 +380,7 @@ img {
 
 /* title input */
 .title__input {
-    width: 326px;
+    width: 384px;
     height: 26px;
     position: absolute;
     top: 12px;
@@ -397,7 +397,7 @@ img {
 /* detail */
 .detail {
     position: absolute;
-    width: 438px;
+    width: 500px;
     height: 110px;
     bottom: -110px;
     background: rgb(184, 219, 163);
@@ -417,7 +417,7 @@ img {
 }
 
 .detail__textarea {
-    width: 326px;
+    width: 384px;
     height: 60px;
     position: absolute;
     top: 11px;
@@ -454,7 +454,7 @@ img {
 
 .add-title__button {
     top: 11px;
-    right: 20px;
+    right: 15px;
 }
 
 label {
