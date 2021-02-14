@@ -1,0 +1,547 @@
+@font-face {
+    font-family: 'NEXON Lv2 Gothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv2 Gothic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+	font-family: "NEXON Lv2 Gothic";
+	font-style: normal;
+	letter-spacing: 0.8px;
+	line-height: 1.2rem;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+*::selection {
+    background-color: rgb(216, 255, 198);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px rgb(234, 243, 225) inset !important;
+}
+
+body {
+	width: 100%;
+	position: relative;
+	float: left;
+	min-height: 91vh;
+	background-color: #fbfff4;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+	margin: 65px 0;
+	overflow: hidden;
+}
+
+/* header */
+header {
+	height: 60px;
+	padding-top: 25px;
+	position: fixed;
+	top: 2px;
+	left: 0;
+	z-index: 9000;
+	width: 100%;
+}
+
+.header {
+    width: 89%;
+    margin: auto;
+}
+
+.logo {
+    position: relative;
+    top: -6px;
+    float: left;
+    width: 50px;
+    margin-top: 2px;
+}
+
+.logo__img {
+    width: 50px;
+    height: 45px;
+    display: block;
+    margin: 0 0 2px 2.5px;
+}
+
+.logo:hover .logo__img, .logo__text {
+    opacity: 0.75;
+}
+
+.logo__text {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: -0.3px;
+    margin-top: 48px;
+}
+
+/* body */
+.day {
+    width: 1400px;
+    position: relative;
+    overflow: hidden;
+}
+
+.day__item {
+    float: left;
+    position: relative;
+    width: 440px;
+    height: 589px;
+    border: 1px solid rgb(143, 190, 135);
+    background: white;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.top {
+    padding: 18px 0;
+    text-align: center;
+    background: rgb(184, 219, 163);
+    height: 102px;
+}
+
+.title__date {
+    font-size: 25px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 3px 0;
+    width: 100%;
+    color: rgb(63, 63, 63);
+}
+
+.title__sentence {
+    display: table;
+}
+
+.sentence {
+    width: 438px;
+    padding: 7px;
+    font-size: 13px;
+    line-height: 18px;
+    height: 58.5px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+/* 할 일 리스트 출력 창 */
+.todolist {
+    position: absolute;
+    width: 438px;
+    height: calc(
+        100% - 102px - 50px
+    ); /*전체 높이 - 상단 title 높이 - 하단 title 입력창 높이 */
+    overflow: auto;
+}
+
+/* 할 일 입력 관련 */
+.display-button {
+    position: relative;
+    width: 25px;
+    top: 75%;
+    left: 50%;
+    cursor: pointer;
+}
+
+.display-button .content {
+    height: calc(
+        100% - 102px - 50px - 101px
+    ); /* 전체 높이 - 상단 title 높이 - 하단 title 입력창 높이 - 하단 content 입력창 높이*/
+    transition: all ease .3s 0s;
+}
+
+.display-button .sentence {
+    height: calc(
+        100% - 102px - 112px
+    ); /* 전체 높이 - 상단 title 높이 - 하단 content 입력창 높이 */
+}
+
+.plan {
+    position: relative;
+    padding: 8px;
+}
+
+.plan:hover {
+    background-color: rgba(234, 243, 225, 0.568);
+}
+
+.plan:hover .buttons-default {
+    display: inline-block;
+}
+
+/* .buttons-default {
+    display: inline-block;
+} */
+
+/* 버튼용 이미지 */
+.plan-check__button,
+img {
+    width: 15px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    opacity: 0.83;
+}
+
+.plan-check__button:hover, img:hover {
+    opacity: 1;
+}
+
+/* 완료 버튼 */
+.plan-check__button {
+    float: left;
+}
+
+/* default로 보이는 할 일 */
+.plan-title__span {
+    display: inline-block;
+    width: 360px;
+    margin-left: 23px;
+    font-size: 14px;
+}
+
+.plan-title__span.completed {
+    color: rgb(201, 201, 201);
+    text-decoration: line-through;
+}
+
+.plan-title__span.important {
+    font-weight: 600;
+}
+
+/* 수정 버튼 클릭 시 보이는 text 박스 */
+.plan-title__input {
+    width: 355px;
+    border: 1px solid rgb(184, 219, 163);
+    padding: 4px;
+    margin-left: 23px;
+    display: none;
+}
+
+.plan-title__input.active {
+    display: inline-block;
+}
+
+/* text 오른쪽 버튼들
+   기본적으로 보이는 수정, 삭제 버튼 */
+.buttons {
+    margin: auto;
+    display: inline-block;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+}
+
+.more__button {
+    display: inline-block;
+    margin-right: 21px;
+}
+
+/* 수정 버튼 클릭 전 기본 버튼 */
+.buttons-default {
+    display: none;
+    margin-right: 21px;
+}
+
+.buttons-default input[type="image"] {
+    width: 15px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    opacity: 0.83;
+}
+
+.hidden {
+    display: none;
+}
+
+input[type="image"]:hover {
+    opacity: 1;
+}
+
+.edit__button,
+.add-feedback__button {
+    margin-right: 21px;
+}
+
+/* 수정 버튼 클릭 시 나타나는 확인 버튼 */
+/* .buttons-edit {
+    display: inline-block;
+}
+
+.edit-check__button {
+    border: 1px solid rgb(98, 150, 89);
+    padding: 3px 6px 4px 6px;
+    font-size: 13px;
+    color: rgb(98, 150, 89);
+    background-color: white;
+} */
+
+.plan-detail {
+    background-color: rgba(241, 241, 241, 0.411);
+}
+
+.plan-detail__span {
+    display: inline-block;
+    width: 360px;
+    margin-left: 32px;
+    font-size: 13px;
+    padding: 7px 0;
+    color: gray;
+    word-break: break-word;
+}
+
+.feedback {
+    background-color: rgba(234, 243, 225, 0.568);
+    min-height: 32px;
+}
+
+.feedback-title {
+    font-weight: 600;
+    display: inline-block;
+    width: 285px;
+    margin-left: 8px;
+    font-size: 13px;
+    padding-top: 7px;
+    color: gray;
+}
+
+.feedback-content {
+    display: inline-block;
+    width: 360px;
+    margin-left: 32px;
+    font-size: 13px;
+    padding: 4px 0 7px 0;
+    color: gray;
+    word-break: break-word;
+}
+
+.feedback-rating {
+    width: 75px;
+    margin-left: 32px;
+    padding-top: 8px;
+    float: left;
+}
+
+img {
+    width: 15px;
+}
+
+/* add-form 내 */
+.title {
+    width: 448px;
+    position: absolute;
+    bottom: 0;
+    padding-bottom: 20px;
+    height: 50px;
+    background: rgb(184, 219, 163);
+    transition: all ease .3s 0s;
+}
+
+.title.active {
+    bottom: 100px;
+    transition: all ease .3s 0s;
+}
+
+/* option button */
+.option__button {
+    width: 26px;
+    position: relative;
+    top: 24.5px;
+    left: 12.5px;
+    opacity: 0.93;
+}
+
+.slide__image {
+    width: 24px;
+    height: 26px;
+    padding-bottom: 1px;
+    background: rgb(250, 255, 246);
+    border: 1px solid rgb(143, 190, 135);
+    display: inline;
+}
+
+.option__button:hover {
+    opacity: 1;
+}
+
+/* title input */
+.title__input {
+    width: 326px;
+    height: 26px;
+    position: absolute;
+    top: 12px;
+    left: 43px;
+    border: none;
+    padding: 0 8px;
+    background: rgba(255, 255, 255, 0.219);
+}
+
+.title__input:focus {
+    background: rgba(255, 255, 255, 0.562);
+}
+
+/* detail */
+.detail {
+    position: absolute;
+    width: 438px;
+    height: 110px;
+    bottom: -110px;
+    background: rgb(184, 219, 163);
+    overflow: hidden;
+    transition: all ease .3s 0s;
+}
+
+.detail.active {
+    bottom: 0px;
+    display: inline-block;
+    transition: all ease .3s 0s;
+}
+
+.detail .sentence {
+    height: 110px;
+    bottom: 0px;
+}
+
+.detail__textarea {
+    width: 326px;
+    height: 60px;
+    position: absolute;
+    top: 11px;
+    left: 43px;
+    padding: 4px 8px;
+    background: rgba(255, 255, 255, 0.219);
+    border: none;
+    resize: none;
+}
+
+.detail__textarea:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.562);
+}
+
+.detail__textarea.sentence {
+    top: 11px;
+}
+
+.detail__button {
+    display: inline-block;
+}
+
+/* detail-buttons */
+.detail-buttons {
+    width: 326px;
+    position: absolute;
+    bottom: 10px;
+    left: 41px;
+}
+.add-detail__button{
+    bottom: 73px;
+}
+
+.add-title__button {
+    top: 11px;
+    right: 20px;
+}
+
+label {
+    font-size: 13px;
+    margin-right: 3px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+label:hover  img{
+    opacity: 1;
+}
+
+.sentence__button {
+    font-size: 13px;
+    display: inline-block;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    cursor: pointer;
+}
+
+/* .sentence__button:hover {
+    opacity: 1;
+} */
+
+.gray__button,
+.color__button {
+    position: relative;
+    top: 5.5px;
+    width: 20px;
+    margin-right: 3px;
+    opacity: 0.83;
+    display: inline-block;
+}
+
+img:hover {
+    opacity: 1;
+}
+
+button {
+    width: 50px;
+    height: 27px;
+    position: absolute;
+    right: 12px;
+    padding-top: 2px;
+    border: 1px solid rgb(143, 190, 135);
+    background: rgb(250, 255, 246);
+    color: rgb(98, 150, 89);
+    opacity: 0.93;
+}
+
+button:hover {
+    opacity: 1;
+}
+    
+.feedback-delete__button {
+    top: 10px;
+    color: rgb(87, 133, 79);
+    border: 1px solid rgb(142, 187, 134);
+    background-color: #d2eec0;
+    opacity: 0.93;
+}
+
+.feedback-delete__button:hover {
+    opacity:1;
+}
+
+.hidden {
+    display: none;
+
+}
+
+/* 스크롤바 */
+::-webkit-scrollbar {
+	color: white;
+	width: 10px;
+}
+
+::-webkit-scrolllbar-button {
+    height: 0;
+}
+
+::-webkit-scrolllbar-thumb {
+    background: rgb(234, 243, 225);
+}
+
+::-webkit-scrolllbar-track {
+    background-color: transparent;
+}
