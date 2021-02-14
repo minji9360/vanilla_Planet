@@ -182,6 +182,8 @@ function checkPlan(i, event) {
 	const todolist = document.querySelector("#todolist1");
 	const btn = event.target;
 	const li = btn.parentNode;
+	loadedToDos = localStorage.getItem(TODOS_LS);
+	parsedToDos = JSON.parse(loadedToDos);
 	let checkToDos = parsedToDos.find(function (toDo) {
 		return toDo.id == parseInt(li.id);
 	});
@@ -192,7 +194,7 @@ function checkPlan(i, event) {
 	} else {
 		checkToDos.complete = true;
 	}
-	toDos.splice(checkToDos.id - 1, 1, checkToDos);
+	toDos.splice(checkToDos.id, 1, checkToDos);
 	saveToDos();
 
 	/* reload something to changed list */
@@ -247,7 +249,7 @@ function paintPlan(id, title, content, important, complete) {
 	contentBtn.classList.add("more__button");
 	contentSpan.classList.add("plan-detail__span");
 	if (important == "true") {
-		if (complete == true) {
+		if (complete == false) {
 			checkBtn.src =
 				"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAAFN0lEQVRoge2ZW2xUVRSGv7VPhzZcKgpVrEhnpngFxU6rckvQGI2aqFHREKNvXqJReTK+GEASE5+0Rh40PvliSCPxEmPCg5IYRYLTAWlQIrZTSiUpaFNE7GV69vJhZjpnDmfoOTBjlfAnk8zee+21/v+stc/es0eoEQ4uY+7oqHnNWLR+jn1j2UH+qkWculo4BRgfNa+I8qoKjJ02Y2Bfr0UcUwunAGq52tNsqVWcmgn4t3BRwEzjrAK6wNnbWlbLUTyf9LRGzskHsH8xV+26o/LLpqKAb69jXmvSHHCsGUgnzIdd4EQJrMZuA0mDpK2126LMBVCQ7qTpdGNmsPGIOZJu4cogO6nkINPCKjVmt8dye2+fffJxcKOSiQoFySTMNuCFUnx5oL3P/cJvWzEDdiFphf0erxuSCfN+lbkGIpM0b+IlD311p91dQbYVMwCQWUqTuuZrYHmxbzxnF6weZNhrty9O3MU8KKJ3gcSBy4F6n7tx4Dhov6p85WA/b+un3x9TwWQSZoJCySpkDfbOVJYjkQV4ROwE2kB+6M26q4pllF5Kq7hmC/AE0d9oLvCRde2WWwfo8w50J2QnyD3AYcHeXYl8KAEA6XZiMsLNDQ30LDvIBEAm7mxQ0Q+AuRGJ+3EK5On2rNtV7OgCJ9nCilPCT3f2M3a2yaEE+JGOm40idFYYHsuToimKT4GXU1n7blQukTeydMJ5TIS3fN1jKG8L9pZU1s5OZe0VImyN4lehszvpPBKVT6QMpK9loeTMIWCBp7tHHftwx6/0em1/bCExaUwf0XBicsLecPtv/BF2QqQMSM5sppz8zzHXrvOTVzCumGei+C6gKTbLbIrEKaxhupnZUm+OAZcUulyjtqOtv7RXZFqc+6yxzwmyBlgYhYgHI+M527x6kNEwxqEzYOqd+ymRB/jYSz4dN5vU6JeCPMS5kweYX+8494bmFdZQ0baytsr24vfuOCtF2BzW17SxjKbC2oZfA6I3lk0Ud9/UkJj1kXxNF0p0+fRWeUwdUxWkZwnzi+1DA/xZdnBTswh0qmUv4xjZ4lxdcY5bSjDULPKG7gLn+iU0Fts3DTAiBTIGIJ1kbSZhhnKOGS5+WhNmOJN0Hi05Ve/GNNLRTa7UlEib1vQCSrEyCWd9a6LEK+eY4UzCDKWTrJ0SIGqe5cyds1GVl0ocy8Z/L7OU81q0Z8ITS+FFKD39ApoKnAsCRD4DrN+Pqn4CsCtOQ5kTlRPlhlUWAI2FmKD6acC4LXDOr4FUn7tjT4LmmGFx0cKF47f1chRgjkNTmTyxUxnYs5RG3DOOzueNOQ5NwNH2ftu5t5UdTv6IDkDOMriyj6EpAQArswxBvtMP72QARU4UF3RdxENbWJjJvACAwoM8GmgXyptbV0bSKFMlJJO1ESBSF8pvKAEiWpYBK55FbJxq139gzEoIJcCi5U9DxfsWqkkGEK1eBnyvUNSUSgjVmmQAG+7BhCshvzN1Sxmo9h5QgJUqCsBXj7OsJwO2NgKEKq4BMGVP41SDZxGHrNXoMFXMgK/OzWkmPa3mCKzCQ2u4iOtjZuuBJVyaSThP4fudUDWEXAOV70bjrFMx75C/lYt0sVtFuAo9BrsxleWbIINAAYXbuMOU/4ScSYxozF7T8YvvFEyFEpJJZzX/HfIA850JZ03QQKAAK8yrLZ/oqMTpwv6L6f+A4DWgbuDZe2bhBl6xBwo4Gec7kD21JRQF8n1vlt2BI5WmpJuZTb153igphFjtyJ0FSg5Dtx2z73Uc4+8Z4XARFzr+AcMkqToDTdalAAAAAElFTkSuQmCC";
 			titleSpan.classList.remove("completed");
@@ -334,7 +336,13 @@ function addPlan(title, content, important) {
 	};
 	toDos.push(toDoObj);
 	saveToDos();
-	paintPlan(newId, title, content, important, false);
+	paintPlan(
+		toDoObj.id,
+		toDoObj.title,
+		toDoObj.content,
+		toDoObj.important,
+		toDoObj.complete
+	);
 }
 
 function loadPlan(i, event) {
@@ -389,8 +397,8 @@ const important = addForm1.querySelector("#important" + 1);
 const index = addForm1.querySelector("#index" + 1);
 const toDoList1 = document.querySelector("#todolist" + 1);
 const TODOS_LS = "toDos";
-const loadedToDos = localStorage.getItem(TODOS_LS);
-const parsedToDos = JSON.parse(loadedToDos);
+let loadedToDos = localStorage.getItem(TODOS_LS);
+let parsedToDos = JSON.parse(loadedToDos);
 
 let toDos = [];
 parsedToDos.forEach(function (toDo) {
@@ -418,6 +426,8 @@ function saveToDos() {
 }
 
 function loadToDos() {
+	loadedToDos = localStorage.getItem(TODOS_LS);
+	parsedToDos = JSON.parse(loadedToDos);
 	if (loadedToDos !== null) {
 		parsedToDos.forEach(function (toDo) {
 			if (toDo != null) {
