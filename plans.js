@@ -74,8 +74,6 @@ function hideButtons() {
 	const planButtons = document.querySelector("#planButtons");
 	const sentence = document.querySelector("#sentenceButton");
 	const rating = document.querySelector("#rating");
-	const addPlan = document.querySelector("#addButton");
-	const editPlan = document.querySelector("#editButton");
 	// const addComment = document.querySelector("#addCommentButton" + i);
 	// const editComment = document.querySelector("#editCommentButton" + i);
 	const addSentence = document.querySelector("#contentButton");
@@ -85,8 +83,8 @@ function hideButtons() {
 	planButtons.classList.add("hidden");
 	sentence.classList.add("hidden");
 	rating.classList.add("hidden");
-	addPlan.classList.add("hidden");
-	// editPlan.classList.add("hidden");
+	addSubmitButton.classList.add("hidden");
+	// editSubmitButton.classList.add("hidden");
 	// addComment.classList.add("hidden");
 	// editComment.classList.add("hidden");
 	addSentence.classList.add("hidden");
@@ -99,7 +97,7 @@ function showButtons(type) {
 	// const sentences = document.querySelector("#sentenceButtons" + i);
 	const sentence = document.querySelector("#sentenceButton");
 	const rating = document.querySelector("#rating");
-	const addPlan = document.querySelector("#addButton");
+	const addSubmitButton = document.querySelector("#addButton");
 	const editPlan = document.querySelector("#editButton");
 	// const addComment = document.querySelector("#addCommentButton" + i);
 	// const editComment = document.querySelector("#editCommentButton" + i);
@@ -108,30 +106,30 @@ function showButtons(type) {
 	// const deleteComment = document.querySelector("#deleteCommentButton" + i);
 
 	if (type === "addPlan") {
-		addPlan.disabled = false;
-		addPlan.classList.remove("hidden");
+		addSubmitButton.disabled = false;
+		addSubmitButton.classList.remove("hidden");
 		planButtons.classList.remove("hidden");
 		sentence.classList.remove("hidden");
 	} else if (type === "editPlan") {
-		addPlan.disabled = true;
+		addSubmitButton.disabled = true;
 		editPlan.classList.remove("hidden");
 		planButtons.classList.remove("hidden");
 	} else if (type === "addSentence") {
-		addPlan.disabled = true;
+		addSubmitButton.disabled = true;
 		// sentences.classList.remove("hidden");
 		sentence.classList.remove("hidden");
 		addSentence.classList.remove("hidden");
 	} else if (type === "editSentence") {
-		addPlan.disabled = true;
+		addSubmitButton.disabled = true;
 		// sentences.classList.remove("hidden");
 		sentence.classList.remove("hidden");
 		editSentence.classList.remove("hidden");
 	} else if (type === "addFeedback") {
-		addPlan.disabled = true;
+		addSubmitButton.disabled = true;
 		// addComment.classList.remove("hidden");
 		rating.classList.remove("hidden");
 	} else if (type === "editFeedback") {
-		addPlan.disabled = true;
+		addSubmitButton.disabled = true;
 		// editComment.classList.remove("hidden");
 		// deleteComment.classList.remove("hidden");
 		rating.classList.remove("hidden");
@@ -238,8 +236,8 @@ function paintPlan(id, title, content, important, complete) {
 	const checkBtn = document.createElement("input");
 	const buttons = document.createElement("div");
 	const defaultBtns = document.createElement("div");
-	// const editBtn = document.createElement("a");
-	// const editImg = document.createElement("img");
+	const editBtn = document.createElement("a");
+	const editImg = document.createElement("img");
 	const delBtn = document.createElement("a");
 	const delImg = document.createElement("img");
 	const titleSpan = document.createElement("span");
@@ -255,7 +253,7 @@ function paintPlan(id, title, content, important, complete) {
 	checkBtn.classList.add("plan-check__button");
 	buttons.classList.add("buttons");
 	defaultBtns.classList.add("buttons-default");
-	// editBtn.classList.add("edit__button");
+	editBtn.classList.add("edit__button");
 	delBtn.classList.add("remove__button");
 	titleSpan.classList.add("plan-title__span");
 	contentBox.classList.add("plan-detail");
@@ -286,8 +284,8 @@ function paintPlan(id, title, content, important, complete) {
 		checkBtn.type = "image";
 	}
 	titleSpan.innerText = title;
-	// editImg.src =
-	// 	"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAAD5klEQVRoge2aP4gcZRjGn+eb2VvBJMtVaSyilanUQpSzUIx6nHjEU66wEGGZG24Pt9JKsLMSrJZjllk4DguFLLh3GtAUCjbiKiHRRlNotAhCRMxFVO72Zl6LyyyTyTf/Zzdb+Ov23W/f/T3zfd/8WZaYMu12+8T+/v4mgBdI/uj7fqvX610u2o8VuqVi23aD5Gci8niovAdg0XXdYZGeUwsQIx9QOMRUAqTIBxQKMfEAGeUDcoeYaICc8gG5QkwsQEH5gMwhJhKgpHxAphCVB6hIPiA1RKUBKpYPSAxRWYAJyQfEhqgkwITlA7QhSgeYknzAHSFKBZiyfMBtIQoHuEvyAeMQhQLYtt0AcAHAY5Vq5eMGyadyB5gReQAAya+NPB+YJflb3KuyjpxBeYjIJ5mW0CzKAxjW6/XnMs0ASRczJg9gsdPp3EydgfX19VO+71+dglQmSF5USj3rOM6fAJA6A77vvzx5rWxE5YEMAUie1ZR/r9QsG0MROROWB1ICWJZ1UkQWIuW/a7XaaRHZrVwxniGOrrx70TcSAyillgFErxUXNjc3//A871UAv1bnGEusPJASQERWNLUdANja2vpLRN6tRDGeRHkgIUCz2TxO8ulIeWSa5vnxi9HoAwAHpTU1kLxoGMZSkjyQEKBWqz0P4J5I+cvwJtre3r4hIt+WU9Wi3bA6YgPELJ+B7styyqWRumzCaAO02+06gKVIWQzDuOPMY5qmC+BmXssYcskDMQEODg7OADgRKX/T7XavRcc6jnNFKfUQybcBfArg3xzCYXLLA4CpK+qWD4CduCbdbvcXAO8AwMbGxrHRaPQKybcAnMroUUge0DxSrq6uGvPz89cAnAzXDcN40HGcK1kbN5vN46Zpvg/gxZShheUBzRJqNBoLiMgD+CGPPHB0najVahaA6wnDSskDmiWklNItn4+yNmy1WvOe5z0DYHk0Gq0AOKYbd+vGbMlxnMLygH4P6Ka8kdTEsqz7lFJnAax4nvdkTN8wQxFZLCsPRPbA2trawyQvxYx9z3XdN4MXrVbrgcPDw2UAqyQXor1iv1BzS1yG244UyaQN94Zt23UcnfNXPM87Teb7UYPkORGxqzjyAdGpfill/Os5+/skL4nIecMwPsx7IsjC+BBalnW/UurnCnoeisgQQJ/kOdd1f6ugZyzjGSBZ5tHxH5JfAOiLyG6v16tsiaQRDqB7dEziOoCPSQ7m5uY+73Q6+9WqZSO8Bx7JMP4qgB3f9wd7e3tf9ft9b0JemRkHEJHLJJ/QjPme5I7v+4My/2mYFOEl9BpJV0QeBfCdiOySHLiu+9Nd9Pufmec/tW7GxmdxZhgAAAAASUVORK5CYII=";
+	editImg.src =
+		"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAAD5klEQVRoge2aP4gcZRjGn+eb2VvBJMtVaSyilanUQpSzUIx6nHjEU66wEGGZG24Pt9JKsLMSrJZjllk4DguFLLh3GtAUCjbiKiHRRlNotAhCRMxFVO72Zl6LyyyTyTf/Zzdb+Ov23W/f/T3zfd/8WZaYMu12+8T+/v4mgBdI/uj7fqvX610u2o8VuqVi23aD5Gci8niovAdg0XXdYZGeUwsQIx9QOMRUAqTIBxQKMfEAGeUDcoeYaICc8gG5QkwsQEH5gMwhJhKgpHxAphCVB6hIPiA1RKUBKpYPSAxRWYAJyQfEhqgkwITlA7QhSgeYknzAHSFKBZiyfMBtIQoHuEvyAeMQhQLYtt0AcAHAY5Vq5eMGyadyB5gReQAAya+NPB+YJflb3KuyjpxBeYjIJ5mW0CzKAxjW6/XnMs0ASRczJg9gsdPp3EydgfX19VO+71+dglQmSF5USj3rOM6fAJA6A77vvzx5rWxE5YEMAUie1ZR/r9QsG0MROROWB1ICWJZ1UkQWIuW/a7XaaRHZrVwxniGOrrx70TcSAyillgFErxUXNjc3//A871UAv1bnGEusPJASQERWNLUdANja2vpLRN6tRDGeRHkgIUCz2TxO8ulIeWSa5vnxi9HoAwAHpTU1kLxoGMZSkjyQEKBWqz0P4J5I+cvwJtre3r4hIt+WU9Wi3bA6YgPELJ+B7styyqWRumzCaAO02+06gKVIWQzDuOPMY5qmC+BmXssYcskDMQEODg7OADgRKX/T7XavRcc6jnNFKfUQybcBfArg3xzCYXLLA4CpK+qWD4CduCbdbvcXAO8AwMbGxrHRaPQKybcAnMroUUge0DxSrq6uGvPz89cAnAzXDcN40HGcK1kbN5vN46Zpvg/gxZShheUBzRJqNBoLiMgD+CGPPHB0najVahaA6wnDSskDmiWklNItn4+yNmy1WvOe5z0DYHk0Gq0AOKYbd+vGbMlxnMLygH4P6Ka8kdTEsqz7lFJnAax4nvdkTN8wQxFZLCsPRPbA2trawyQvxYx9z3XdN4MXrVbrgcPDw2UAqyQXor1iv1BzS1yG244UyaQN94Zt23UcnfNXPM87Teb7UYPkORGxqzjyAdGpfill/Os5+/skL4nIecMwPsx7IsjC+BBalnW/UurnCnoeisgQQJ/kOdd1f6ugZyzjGSBZ5tHxH5JfAOiLyG6v16tsiaQRDqB7dEziOoCPSQ7m5uY+73Q6+9WqZSO8Bx7JMP4qgB3f9wd7e3tf9ft9b0JemRkHEJHLJJ/QjPme5I7v+4My/2mYFOEl9BpJV0QeBfCdiOySHLiu+9Nd9Pufmec/tW7GxmdxZhgAAAAASUVORK5CYII=";
 	delImg.src =
 		"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iNDgiIGhlaWdodD0iNDgiCnZpZXdCb3g9IjAgMCAxNzIgMTcyIgpzdHlsZT0iIGZpbGw6IzAwMDAwMDsiPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1kYXNoYXJyYXk9IiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIGZvbnQtZmFtaWx5PSJub25lIiBmb250LXdlaWdodD0ibm9uZSIgZm9udC1zaXplPSJub25lIiB0ZXh0LWFuY2hvcj0ibm9uZSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOiBub3JtYWwiPjxwYXRoIGQ9Ik0wLDE3MnYtMTcyaDE3MnYxNzJ6IiBmaWxsPSJub25lIj48L3BhdGg+PHBhdGggZD0iTTg1LjE0LDg2Ljg2di0xLjcyaDEuNzJ2MS43MnoiIGZpbGw9IiNjY2NjY2MiPjwvcGF0aD48ZyBmaWxsPSIjYmMxMjAwIj48cGF0aCBkPSJNNjkuMTQ0LDEuNzJsLTguNDI4LDguNDI4aC0zMy43MTJjLTUuMDU2OCwwIC04LjQyOCwzLjM3MTIgLTguNDI4LDguNDI4YzAsNS4wNTY4IDMuMzcxMiw4LjQyOCA4LjQyOCw4LjQyOGgxNi44NTZoODQuMjhoMTYuODU2YzUuMDU2OCwwIDguNDI4LC0zLjM3MTIgOC40MjgsLTguNDI4YzAsLTUuMDU2OCAtMy4zNzEyLC04LjQyOCAtOC40MjgsLTguNDI4aC0zMy43MTJsLTguNDI4LC04LjQyOHpNMjcuMDA0LDQzLjg2djEwOS41NjRjMCw5LjI3MDggNy41ODUyLDE2Ljg1NiAxNi44NTYsMTYuODU2aDg0LjI4YzkuMjcwOCwwIDE2Ljg1NiwtNy41ODUyIDE2Ljg1NiwtMTYuODU2di0xMDkuNTY0ek02MC43MTYsNjAuNzE2YzUuMDU2OCwwIDguNDI4LDMuMzcxMiA4LjQyOCw4LjQyOHY3NS44NTJjMCw1LjA1NjggLTMuMzcxMiw4LjQyOCAtOC40MjgsOC40MjhjLTUuMDU2OCwwIC04LjQyOCwtMy4zNzEyIC04LjQyOCwtOC40Mjh2LTc1Ljg1MmMwLC01LjA1NjggMy4zNzEyLC04LjQyOCA4LjQyOCwtOC40Mjh6TTExMS4yODQsNjAuNzE2YzUuMDU2OCwwIDguNDI4LDMuMzcxMiA4LjQyOCw4LjQyOHY3NS44NTJjMCw1LjA1NjggLTMuMzcxMiw4LjQyOCAtOC40MjgsOC40MjhjLTUuMDU2OCwwIC04LjQyOCwtMy4zNzEyIC04LjQyOCwtOC40Mjh2LTc1Ljg1MmMwLC01LjA1NjggMy4zNzEyLC04LjQyOCA4LjQyOCwtOC40Mjh6Ij48L3BhdGg+PC9nPjwvZz48L3N2Zz4=";
 
@@ -297,9 +295,9 @@ function paintPlan(id, title, content, important, complete) {
 	delBtn.addEventListener("click", (event) => {
 		deletePlan(event);
 	});
-	// editBtn.addEventListener("click", (event) => {
-	// 	clickEdit(1, event);
-	// });
+	editBtn.addEventListener("click", (event) => {
+		clickEdit(event);
+	});
 	contentBtn.addEventListener("click", (event) => {
 		slidePlanDetail(event);
 	});
@@ -309,9 +307,9 @@ function paintPlan(id, title, content, important, complete) {
 	li.appendChild(titleSpan);
 	li.appendChild(buttons);
 	buttons.appendChild(defaultBtns);
-	// defaultBtns.appendChild(editBtn);
+	defaultBtns.appendChild(editBtn);
 	defaultBtns.appendChild(delBtn);
-	// editBtn.appendChild(editImg);
+	editBtn.appendChild(editImg);
 	delBtn.appendChild(delImg);
 	if (content !== "") {
 		contentDownBtn.src =
@@ -338,25 +336,26 @@ function paintPlan(id, title, content, important, complete) {
 }
 
 function addPlan(title, content, important) {
-	const newId = toDos[toDos.length - 1] ? toDos[toDos.length - 1].id + 1 : 0;
-	const toDoObj = {
-		id: newId,
-		title: title,
-		content: content,
-		important: important,
-		complete: false,
-		feedback: {},
-	};
-	console.log(toDos);
-	toDos.push(toDoObj);
-	saveToDos();
-	paintPlan(
-		toDoObj.id,
-		toDoObj.title,
-		toDoObj.content,
-		toDoObj.important,
-		toDoObj.complete
-	);
+	if (title != "") {
+		const newId = toDos[toDos.length - 1] ? toDos[toDos.length - 1].id + 1 : 0;
+		const toDoObj = {
+			id: newId,
+			title: title,
+			content: content,
+			important: important,
+			complete: false,
+			feedback: {},
+		};
+		toDos.push(toDoObj);
+		saveToDos();
+		paintPlan(
+			toDoObj.id,
+			toDoObj.title,
+			toDoObj.content,
+			toDoObj.important,
+			toDoObj.complete
+		);
+	} else alert("할 일을 입력해주세요.");
 }
 
 function loadPlan(event) {
@@ -381,13 +380,16 @@ function clickEdit(event) {
 		resetData();
 		clickSlide();
 		loadPlan(event);
+		changeBtn(addSubmitButton, editSubmitButton);
 	} else {
 		if (index.value == li.id) {
 			resetData();
 			clickSlide();
+			changeBtn(editSubmitButton, addSubmitButton);
 		} else {
 			resetData();
 			loadPlan(event);
+			changeBtn(addSubmitButton, editSubmitButton);
 		}
 	}
 }
@@ -395,17 +397,22 @@ function clickEdit(event) {
 function deletePlan(event) {
 	const btn = event.target;
 	const li = btn.parentNode.parentNode.parentNode.parentNode;
+	const content = document.querySelector("#content" + li.id);
 	toDoList.removeChild(li);
 	const cleanToDos = toDos.filter(function (toDo) {
 		return toDo.id !== parseInt(li.id);
 	});
+	if (content != null) {
+		toDoList.removeChild(content);
+	}
 	toDos = cleanToDos;
 	saveToDos();
 }
 
 const todolist = document.querySelector("#todolist");
 const addForm = document.querySelector("#addForm");
-const addButton = document.querySelector("#addButton");
+const addSubmitButton = document.querySelector("#addButton");
+const editSubmitButton = document.querySelector("#editButton");
 const toDoInput = addForm.querySelector("input");
 const toDoTextarea = addForm.querySelector("textarea");
 const important = addForm.querySelector("#important");
@@ -462,7 +469,7 @@ function loadToDos() {
 function init() {
 	loadToDos();
 	setToday();
-	addButton.addEventListener("click", (event) => {
+	addSubmitButton.addEventListener("click", (event) => {
 		handleAddSubmit(event);
 	});
 }
