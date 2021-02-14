@@ -1,3 +1,18 @@
+function setToday() {
+	const title = document.querySelector(".title__date");
+	const titleDate = title.querySelector(".date");
+	const titleDay = title.querySelector(".day");
+	const today = new Date();
+	const month = today.getMonth() + 1;
+	const date = today.getDate();
+	const day = today.getDay();
+	const days = ["일", "월", "화", "수", "목", "금", "토"];
+
+	console.log(month);
+	titleDate.innerText = month + "월 " + date + "일";
+	titleDay.innerText = days[day] + "요일";
+}
+
 function slidePlanDetail(index, event) {
 	const btn = event.target;
 	const li = btn.parentNode.parentNode.parentNode;
@@ -447,6 +462,7 @@ function loadToDos() {
 
 function init() {
 	loadToDos();
+	setToday();
 	addButton1.addEventListener("click", (event) => {
 		handleAddSubmit(1, event);
 	});
