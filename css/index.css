@@ -290,11 +290,11 @@ input[type="image"]:hover {
     background-color: white;
 } */
 
-.detail {
+.plan-detail {
     background-color: rgba(241, 241, 241, 0.411);
 }
 
-.detail__span {
+.plan-detail__span {
     display: inline-block;
     width: 360px;
     margin-left: 32px;
@@ -342,7 +342,7 @@ img {
 
 /* add-form 내 */
 .title {
-    width: 438px;
+    width: 448px;
     position: absolute;
     bottom: 0;
     padding-bottom: 20px;
@@ -454,6 +454,7 @@ img {
 
 .add-title__button {
     top: 11px;
+    right: 20px;
 }
 
 label {

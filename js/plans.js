@@ -1,11 +1,14 @@
-function slidePlanDetail(index) {
-	const content = document.querySelector("#detailBox" + index);
-	const downButton = document.querySelector("#moreDown" + index);
-	const upButton = document.querySelector("#moreUp" + index);
+function slidePlanDetail(index, event) {
+	const btn = event.target;
+	const li = btn.parentNode.parentNode.parentNode;
+	const content = document.querySelector("#content" + li.id);
+	const contentBtns = btn.parentNode;
+	const downButton = contentBtns.querySelector(".down");
+	const upButton = contentBtns.querySelector(".up");
 
-	content.classList.toggle("hidden");
 	downButton.classList.toggle("hidden");
 	upButton.classList.toggle("hidden");
+	content.classList.toggle("hidden");
 }
 
 /* data */
@@ -189,7 +192,7 @@ function checkPlan(i, event) {
 	} else {
 		checkToDos.complete = true;
 	}
-	toDos.splice(checkToDos.id, 1, checkToDos);
+	toDos.splice(checkToDos.id - 1, 1, checkToDos);
 	saveToDos();
 
 	/* reload something to changed list */
@@ -230,6 +233,8 @@ function paintPlan(id, title, content, important, complete) {
 	const contentDownBtn = document.createElement("img");
 	const contentUpBtn = document.createElement("img");
 	const contentSpan = document.createElement("span");
+	const detail = document.createElement("div");
+	const detailSpan = document.createElement("span");
 
 	li.classList.add("plan");
 	checkBtn.classList.add("plan-check__button");
@@ -280,6 +285,9 @@ function paintPlan(id, title, content, important, complete) {
 	editBtn.addEventListener("click", (event) => {
 		clickEdit(1, event);
 	});
+	contentBtn.addEventListener("click", (event) => {
+		slidePlanDetail(1, event);
+	});
 
 	toDoList1.appendChild(li);
 	li.appendChild(checkBtn);
@@ -291,13 +299,25 @@ function paintPlan(id, title, content, important, complete) {
 	editBtn.appendChild(editImg);
 	delBtn.appendChild(delImg);
 	if (content !== "") {
-		contentSpan.id = "content" + id;
 		contentDownBtn.src =
 			"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAACI0lEQVRoge2WvYsTQRxA30wgkSxcEbg7rtBiC5VgCv+CQ0FEsDiRIFyVwLJZAjb+I2ks8gVJY2M4vEIEo56cVcpUEUtREBGSSjRfuxZ3ykayyWSz0WYeLIGZ3+y+B9kQ0Gg0Go1Go9FoNBrN/0GoDhYKhVue55WAS8CL8Xj8sNFofItCIp/Pb8fj8cee590BPgohHlUqlVcqZ5UCisXixclk8h4wfMs913Vv1uv1ryGc/2BZ1q6U8gRI+5a/u657tV6vf152Xqo8ZDqd7jMrD5CWUp5YlrWrrjtLgDyAIYTYV7mHUoDrup8CtkJHLJA/E5My6JmzcypDtVrtFDgO2F45Ypk8cFypVN6p3EspAGAwGDwQQjwP2E5LKU9t297zL3Y6na1Op7PlX3McZ0dK+Zpg+bZhGIeqXsoBrVZr1O/37y+IuAK8/TvCj+M4O67rvgGuBYy0DcM4KJVKP1S9lH9Gf5PNZuOpVOrI87y7ASMfgBvVavWLf3ET8hAiAFaP2JQ8hAwA9Qgp5XRT8rBGAEAul7uQSCSOPc+7HTDSO/+c+8IKIV4Oh8ODZrP5M6xDLOxBgG63OzFN82kymbwOXJ4zsn1+zaNtGMa9crkcWh7WDADo9XpT0zSPFkTMY62vjZ+1A2DliMjkIaIAUI6IVB4iDIClEZHLQ8QBcBaRyWSexWIxE8gACCGejEajw3Vf2H+Obdt7i/5aaDQajUaj0WjW4xcM6eEguPqbRwAAAABJRU5ErkJggg==";
+		contentUpBtn.src =
+			"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAACDElEQVRoge2Vv2vbQBTHv3cGycXQrS2BJku3UhsKHrSlSUMCIUO3QiZRbOFFg/8Sr8JSjZeWQgJt1kJKuhkCxkMxpP9AiLsZRCv/uOtQBMVIzkk+be8z3nv33vd7904CCIIgCIIgiEJwHGfLcZytInuwIoratl02DOM9gFMAYIx9iKKo0e/3/+jupd2A67rmbDY7l1KerIS+ViqVN51O57fOfloNrBEfo92ENgMK4mO0mtBiIIP4GG0mNjaQQ3yMFhOlTTbbtl1mjF1IKY9TUsYAfgF4lBB7tlgs6tVq9Xw0Gi3yauB5N7qua5qmeSalPEpJuQFwwDnfA/AjKUFKeWQYxkW73X6QV0euEVIYmxsAe91u9xYAWq3WYyHEJYAXKfm5xymzgaziY4oykclAVvGDweAhAFiWNQWKMaH8BvKe/P94njfhnL9GypsAcBiG4Zcsb0LZQBRFn9aIHwshdlfFW5Y1jU8/xvO8iRDiAP++UEkchmH4UVWX0gg1m81dxthVSngshNgPguBOtSkANBqNJ5zzbwCeJ8WllK983/9+Xx2lG+Ccb6eEcokHgCAI7oQQ+0i/iadK2lSSlsvlFYBwZTm3+Jg1JkIp5b2nDyj+iYfD4bRer18DeAmgDODzfD5/2+v1JpkUJ9cOa7XaWalU2gGwA+AnY+yd7/ujTWsTBEEQBEEQBEEQRfIXsHQhP8gho60AAAAASUVORK5CYII=";
 		toDoList1.appendChild(contentBox);
 		contentBox.appendChild(contentSpan);
+		detail.appendChild(detailSpan);
+		li.appendChild(detail);
 		buttons.appendChild(contentBtn);
 		contentBtn.appendChild(contentDownBtn);
+		contentBtn.appendChild(contentUpBtn);
+
+		contentBox.classList.add("hidden");
+		contentDownBtn.classList.add("down");
+		contentUpBtn.classList.add("up");
+		contentUpBtn.classList.add("hidden");
+
+		contentBox.id = "content" + id;
+		contentSpan.innerText = content;
 	}
 	li.id = id;
 }
