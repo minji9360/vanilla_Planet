@@ -38,11 +38,10 @@ function loadImportant(i) {
 function resetData(i) {
 	const title = document.querySelector("#titleInput" + i);
 	const content = document.querySelector("#contentInput" + i);
-	// const planId = document.querySelector("#idInput" + i);
 
 	title.value = "";
 	content.value = "";
-	// planId.value = "";
+	index.value = "";
 	important.value = false;
 
 	loadImportant(i);
@@ -322,7 +321,6 @@ function loadPlan(i, event) {
 	const btn = event.target;
 	const li = btn.parentNode.parentNode.parentNode.parentNode;
 	const span = li.querySelector("span");
-	const index = addForm1.querySelector("#index" + i);
 
 	toDoInput.value = span.innerText;
 	index.value = li.id;
@@ -334,17 +332,21 @@ function loadPlan(i, event) {
 
 function clickEdit(_i, event) {
 	const downBtn = document.querySelector("#downImage" + _i);
-	const index = addForm1.querySelector("#index" + _i);
 	const btn = event.target;
 	const li = btn.parentNode.parentNode.parentNode.parentNode;
 
-	resetData(_i);
 	if (downBtn.classList.contains("hidden")) {
+		resetData(_i);
 		clickSlide(_i);
 		loadPlan(_i, event);
 	} else {
-		if (index.value == li.id) clickSlide(_i);
-		else loadPlan(_i, event);
+		if (index.value == li.id) {
+			resetData(_i);
+			clickSlide(_i);
+		} else {
+			resetData(_i);
+			loadPlan(_i, event);
+		}
 	}
 }
 
@@ -364,6 +366,7 @@ const addButton1 = document.querySelector("#addButton" + 1);
 const toDoInput = addForm1.querySelector("input");
 const toDoTextarea = addForm1.querySelector("textarea");
 const important = addForm1.querySelector("#important" + 1);
+const index = addForm1.querySelector("#index" + 1);
 const toDoList1 = document.querySelector("#todolist" + 1);
 const TODOS_LS = "toDos";
 const loadedToDos = localStorage.getItem(TODOS_LS);
