@@ -8,7 +8,6 @@ function setToday() {
 	const day = today.getDay();
 	const days = ["일", "월", "화", "수", "목", "금", "토"];
 
-	console.log(month);
 	titleDate.innerText = month + "월 " + date + "일";
 	titleDay.innerText = days[day] + "요일";
 }
@@ -194,7 +193,6 @@ function clickSlide(index) {
 }
 
 function checkPlan(i, event) {
-	const todolist = document.querySelector("#todolist1");
 	const btn = event.target;
 	const li = btn.parentNode;
 	loadedToDos = localStorage.getItem(TODOS_LS);
@@ -404,6 +402,7 @@ function deletePlan(_i, event) {
 	saveToDos();
 }
 
+const todolist = document.querySelector("#todolist1");
 const addForm1 = document.querySelector("#addForm" + 1);
 const addButton1 = document.querySelector("#addButton" + 1);
 const toDoInput = addForm1.querySelector("input");
@@ -416,9 +415,11 @@ let loadedToDos = localStorage.getItem(TODOS_LS);
 let parsedToDos = JSON.parse(loadedToDos);
 
 let toDos = [];
-parsedToDos.forEach(function (toDo) {
-	toDos.push(toDo);
-});
+if (parsedToDos != null) {
+	parsedToDos.forEach(function (toDo) {
+		toDos.push(toDo);
+	});
+}
 
 /* submit */
 function handleAddSubmit(i, event) {
