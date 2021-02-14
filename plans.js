@@ -12,7 +12,7 @@ function setToday() {
 	titleDay.innerText = days[day] + "요일";
 }
 
-function slidePlanDetail(index, event) {
+function slidePlanDetail(event) {
 	const btn = event.target;
 	const li = btn.parentNode.parentNode.parentNode;
 	const content = document.querySelector("#content" + li.id);
@@ -26,9 +26,9 @@ function slidePlanDetail(index, event) {
 }
 
 /* data */
-function updateImportant(i) {
-	const grayButton = document.querySelector("#importantGray" + i);
-	const colorButton = document.querySelector("#importantColor" + i);
+function updateImportant() {
+	const grayButton = document.querySelector("#importantGray");
+	const colorButton = document.querySelector("#importantColor");
 
 	if (important.checked === true) {
 		important.value = false;
@@ -39,9 +39,9 @@ function updateImportant(i) {
 	}
 }
 
-function loadImportant(i) {
-	const grayButton = document.querySelector("#importantGray" + i);
-	const colorButton = document.querySelector("#importantColor" + i);
+function loadImportant() {
+	const grayButton = document.querySelector("#importantGray");
+	const colorButton = document.querySelector("#importantColor");
 
 	if (important.value === "true") {
 		important.checked = true;
@@ -52,16 +52,16 @@ function loadImportant(i) {
 	}
 }
 
-function resetData(i) {
-	const title = document.querySelector("#titleInput" + i);
-	const content = document.querySelector("#contentInput" + i);
+function resetData() {
+	const title = document.querySelector("#titleInput");
+	const content = document.querySelector("#contentInput");
 
 	title.value = "";
 	content.value = "";
 	index.value = "";
 	important.value = false;
 
-	loadImportant(i);
+	loadImportant();
 }
 
 /* change button */
@@ -70,16 +70,16 @@ function changeBtn(hiddenButton, shownButton) {
 	shownButton.classList.remove("hidden");
 }
 
-function hideButtons(i) {
-	const planButtons = document.querySelector("#planButtons" + i);
-	const sentence = document.querySelector("#sentenceButton" + i);
-	const rating = document.querySelector("#rating" + i);
-	const addPlan = document.querySelector("#addButton" + i);
-	const editPlan = document.querySelector("#editButton" + i);
+function hideButtons() {
+	const planButtons = document.querySelector("#planButtons");
+	const sentence = document.querySelector("#sentenceButton");
+	const rating = document.querySelector("#rating");
+	const addPlan = document.querySelector("#addButton");
+	const editPlan = document.querySelector("#editButton");
 	// const addComment = document.querySelector("#addCommentButton" + i);
 	// const editComment = document.querySelector("#editCommentButton" + i);
-	const addSentence = document.querySelector("#contentButton" + i);
-	const editSentence = document.querySelector("#editSentenceButton" + i);
+	const addSentence = document.querySelector("#contentButton");
+	const editSentence = document.querySelector("#editSentenceButton");
 	// const deleteComment = document.querySelector("#deleteCommentButton" + i);
 
 	planButtons.classList.add("hidden");
@@ -94,17 +94,17 @@ function hideButtons(i) {
 	// deleteComment.classList.add("hidden");
 }
 
-function showButtons(type, i) {
-	const planButtons = document.querySelector("#planButtons" + i);
+function showButtons(type) {
+	const planButtons = document.querySelector("#planButtons");
 	// const sentences = document.querySelector("#sentenceButtons" + i);
-	const sentence = document.querySelector("#sentenceButton" + i);
-	const rating = document.querySelector("#rating" + i);
-	const addPlan = document.querySelector("#addButton" + i);
-	const editPlan = document.querySelector("#editButton" + i);
+	const sentence = document.querySelector("#sentenceButton");
+	const rating = document.querySelector("#rating");
+	const addPlan = document.querySelector("#addButton");
+	const editPlan = document.querySelector("#editButton");
 	// const addComment = document.querySelector("#addCommentButton" + i);
 	// const editComment = document.querySelector("#editCommentButton" + i);
-	const addSentence = document.querySelector("#contentButton" + i);
-	const editSentence = document.querySelector("#editSentenceButton" + i);
+	const addSentence = document.querySelector("#contentButton");
+	const editSentence = document.querySelector("#editSentenceButton");
 	// const deleteComment = document.querySelector("#deleteCommentButton" + i);
 
 	if (type === "addPlan") {
@@ -139,18 +139,18 @@ function showButtons(type, i) {
 }
 
 /* click button */
-function clickSentence(i) {
-	const grayButton = document.querySelector("#sentenceGray" + i);
-	const colorButton = document.querySelector("#sentenceColor" + i);
-	const dailyGrayButton = document.querySelector("#dailyGray" + i);
-	const dailyColorButton = document.querySelector("#dailyColor" + i);
-	const goalGrayButton = document.querySelector("#goalGray" + i);
-	const goalColorButton = document.querySelector("#goalColor" + i);
-	const titleBox = document.querySelector("#titleBox" + i);
-	const title = document.querySelector("#titleInput" + i);
-	const contentInput = document.querySelector("#contentInput" + i);
+function clickSentence() {
+	const grayButton = document.querySelector("#sentenceGray");
+	const colorButton = document.querySelector("#sentenceColor");
+	const dailyGrayButton = document.querySelector("#dailyGray");
+	const dailyColorButton = document.querySelector("#dailyColor");
+	const goalGrayButton = document.querySelector("#goalGray");
+	const goalColorButton = document.querySelector("#goalColor");
+	const titleBox = document.querySelector("#titleBox");
+	const title = document.querySelector("#titleInput");
+	const contentInput = document.querySelector("#contentInput");
 
-	hideButtons(i);
+	hideButtons();
 	if (colorButton.classList.contains("hidden")) {
 		changeBtn(grayButton, colorButton);
 		// changeBtn(dailyGrayButton, dailyColorButton);
@@ -159,7 +159,7 @@ function clickSentence(i) {
 		// changeListHeight("sentence", i);
 		title.required = false;
 		titleBox.classList.add("hidden");
-		showButtons("addSentence", i);
+		showButtons("addSentence");
 		contentInput.placeholder = "명언이나 목표를 작성해주세요.";
 
 		// if (sentence === undefined) {
@@ -169,8 +169,8 @@ function clickSentence(i) {
 		// }
 	} else {
 		changeBtn(colorButton, grayButton);
-		resetData(i);
-		showButtons("addPlan", i);
+		resetData();
+		showButtons("addPlan");
 		// changeListHeight("title", i);
 		title.required = true;
 		titleBox.classList.remove("hidden");
@@ -178,12 +178,12 @@ function clickSentence(i) {
 	}
 }
 
-function clickSlide(index) {
-	const titleBox = document.querySelector("#titleBox" + index);
-	const detailBox = document.querySelector("#detailBox" + index);
-	const upImage = document.querySelector("#upImage" + index);
-	const downImage = document.querySelector("#downImage" + index);
-	const todolist = document.querySelector("#todolist" + index);
+function clickSlide() {
+	const titleBox = document.querySelector("#titleBox");
+	const detailBox = document.querySelector("#detailBox");
+	const upImage = document.querySelector("#upImage");
+	const downImage = document.querySelector("#downImage");
+	const todolist = document.querySelector("#todolist");
 
 	titleBox.classList.toggle("active");
 	detailBox.classList.toggle("active");
@@ -192,7 +192,7 @@ function clickSlide(index) {
 	todolist.classList.toggle("content");
 }
 
-function checkPlan(i, event) {
+function checkPlan(event) {
 	const btn = event.target;
 	const li = btn.parentNode;
 	loadedToDos = localStorage.getItem(TODOS_LS);
@@ -292,19 +292,19 @@ function paintPlan(id, title, content, important, complete) {
 		"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iNDgiIGhlaWdodD0iNDgiCnZpZXdCb3g9IjAgMCAxNzIgMTcyIgpzdHlsZT0iIGZpbGw6IzAwMDAwMDsiPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1kYXNoYXJyYXk9IiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIGZvbnQtZmFtaWx5PSJub25lIiBmb250LXdlaWdodD0ibm9uZSIgZm9udC1zaXplPSJub25lIiB0ZXh0LWFuY2hvcj0ibm9uZSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOiBub3JtYWwiPjxwYXRoIGQ9Ik0wLDE3MnYtMTcyaDE3MnYxNzJ6IiBmaWxsPSJub25lIj48L3BhdGg+PHBhdGggZD0iTTg1LjE0LDg2Ljg2di0xLjcyaDEuNzJ2MS43MnoiIGZpbGw9IiNjY2NjY2MiPjwvcGF0aD48ZyBmaWxsPSIjYmMxMjAwIj48cGF0aCBkPSJNNjkuMTQ0LDEuNzJsLTguNDI4LDguNDI4aC0zMy43MTJjLTUuMDU2OCwwIC04LjQyOCwzLjM3MTIgLTguNDI4LDguNDI4YzAsNS4wNTY4IDMuMzcxMiw4LjQyOCA4LjQyOCw4LjQyOGgxNi44NTZoODQuMjhoMTYuODU2YzUuMDU2OCwwIDguNDI4LC0zLjM3MTIgOC40MjgsLTguNDI4YzAsLTUuMDU2OCAtMy4zNzEyLC04LjQyOCAtOC40MjgsLTguNDI4aC0zMy43MTJsLTguNDI4LC04LjQyOHpNMjcuMDA0LDQzLjg2djEwOS41NjRjMCw5LjI3MDggNy41ODUyLDE2Ljg1NiAxNi44NTYsMTYuODU2aDg0LjI4YzkuMjcwOCwwIDE2Ljg1NiwtNy41ODUyIDE2Ljg1NiwtMTYuODU2di0xMDkuNTY0ek02MC43MTYsNjAuNzE2YzUuMDU2OCwwIDguNDI4LDMuMzcxMiA4LjQyOCw4LjQyOHY3NS44NTJjMCw1LjA1NjggLTMuMzcxMiw4LjQyOCAtOC40MjgsOC40MjhjLTUuMDU2OCwwIC04LjQyOCwtMy4zNzEyIC04LjQyOCwtOC40Mjh2LTc1Ljg1MmMwLC01LjA1NjggMy4zNzEyLC04LjQyOCA4LjQyOCwtOC40Mjh6TTExMS4yODQsNjAuNzE2YzUuMDU2OCwwIDguNDI4LDMuMzcxMiA4LjQyOCw4LjQyOHY3NS44NTJjMCw1LjA1NjggLTMuMzcxMiw4LjQyOCAtOC40MjgsOC40MjhjLTUuMDU2OCwwIC04LjQyOCwtMy4zNzEyIC04LjQyOCwtOC40Mjh2LTc1Ljg1MmMwLC01LjA1NjggMy4zNzEyLC04LjQyOCA4LjQyOCwtOC40Mjh6Ij48L3BhdGg+PC9nPjwvZz48L3N2Zz4=";
 
 	checkBtn.addEventListener("click", (event) => {
-		checkPlan(1, event);
+		checkPlan(event);
 	});
 	delBtn.addEventListener("click", (event) => {
-		deletePlan(1, event);
+		deletePlan(event);
 	});
 	// editBtn.addEventListener("click", (event) => {
 	// 	clickEdit(1, event);
 	// });
 	contentBtn.addEventListener("click", (event) => {
-		slidePlanDetail(1, event);
+		slidePlanDetail(event);
 	});
 
-	toDoList1.appendChild(li);
+	toDoList.appendChild(li);
 	li.appendChild(checkBtn);
 	li.appendChild(titleSpan);
 	li.appendChild(buttons);
@@ -318,7 +318,7 @@ function paintPlan(id, title, content, important, complete) {
 			"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAACI0lEQVRoge2WvYsTQRxA30wgkSxcEbg7rtBiC5VgCv+CQ0FEsDiRIFyVwLJZAjb+I2ks8gVJY2M4vEIEo56cVcpUEUtREBGSSjRfuxZ3ykayyWSz0WYeLIGZ3+y+B9kQ0Gg0Go1Go9FoNBrN/0GoDhYKhVue55WAS8CL8Xj8sNFofItCIp/Pb8fj8cee590BPgohHlUqlVcqZ5UCisXixclk8h4wfMs913Vv1uv1ryGc/2BZ1q6U8gRI+5a/u657tV6vf152Xqo8ZDqd7jMrD5CWUp5YlrWrrjtLgDyAIYTYV7mHUoDrup8CtkJHLJA/E5My6JmzcypDtVrtFDgO2F45Ypk8cFypVN6p3EspAGAwGDwQQjwP2E5LKU9t297zL3Y6na1Op7PlX3McZ0dK+Zpg+bZhGIeqXsoBrVZr1O/37y+IuAK8/TvCj+M4O67rvgGuBYy0DcM4KJVKP1S9lH9Gf5PNZuOpVOrI87y7ASMfgBvVavWLf3ET8hAiAFaP2JQ8hAwA9Qgp5XRT8rBGAEAul7uQSCSOPc+7HTDSO/+c+8IKIV4Oh8ODZrP5M6xDLOxBgG63OzFN82kymbwOXJ4zsn1+zaNtGMa9crkcWh7WDADo9XpT0zSPFkTMY62vjZ+1A2DliMjkIaIAUI6IVB4iDIClEZHLQ8QBcBaRyWSexWIxE8gACCGejEajw3Vf2H+Obdt7i/5aaDQajUaj0WjW4xcM6eEguPqbRwAAAABJRU5ErkJggg==";
 		contentUpBtn.src =
 			"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAACDElEQVRoge2Vv2vbQBTHv3cGycXQrS2BJku3UhsKHrSlSUMCIUO3QiZRbOFFg/8Sr8JSjZeWQgJt1kJKuhkCxkMxpP9AiLsZRCv/uOtQBMVIzkk+be8z3nv33vd7904CCIIgCIIgiEJwHGfLcZytInuwIoratl02DOM9gFMAYIx9iKKo0e/3/+jupd2A67rmbDY7l1KerIS+ViqVN51O57fOfloNrBEfo92ENgMK4mO0mtBiIIP4GG0mNjaQQ3yMFhOlTTbbtl1mjF1IKY9TUsYAfgF4lBB7tlgs6tVq9Xw0Gi3yauB5N7qua5qmeSalPEpJuQFwwDnfA/AjKUFKeWQYxkW73X6QV0euEVIYmxsAe91u9xYAWq3WYyHEJYAXKfm5xymzgaziY4oykclAVvGDweAhAFiWNQWKMaH8BvKe/P94njfhnL9GypsAcBiG4Zcsb0LZQBRFn9aIHwshdlfFW5Y1jU8/xvO8iRDiAP++UEkchmH4UVWX0gg1m81dxthVSngshNgPguBOtSkANBqNJ5zzbwCeJ8WllK983/9+Xx2lG+Ccb6eEcokHgCAI7oQQ+0i/iadK2lSSlsvlFYBwZTm3+Jg1JkIp5b2nDyj+iYfD4bRer18DeAmgDODzfD5/2+v1JpkUJ9cOa7XaWalU2gGwA+AnY+yd7/ujTWsTBEEQBEEQBEEQRfIXsHQhP8gho60AAAAASUVORK5CYII=";
-		toDoList1.appendChild(contentBox);
+		toDoList.appendChild(contentBox);
 		contentBox.appendChild(contentSpan);
 		detail.appendChild(detailSpan);
 		li.appendChild(detail);
@@ -347,6 +347,7 @@ function addPlan(title, content, important) {
 		complete: false,
 		feedback: {},
 	};
+	console.log(toDos);
 	toDos.push(toDoObj);
 	saveToDos();
 	paintPlan(
@@ -358,7 +359,7 @@ function addPlan(title, content, important) {
 	);
 }
 
-function loadPlan(i, event) {
+function loadPlan(event) {
 	const btn = event.target;
 	const li = btn.parentNode.parentNode.parentNode.parentNode;
 	const span = li.querySelector("span");
@@ -367,34 +368,34 @@ function loadPlan(i, event) {
 	index.value = li.id;
 	if (span.classList.contains("important")) {
 		important.value = true;
-		loadImportant(i);
+		loadImportant();
 	}
 }
 
-function clickEdit(_i, event) {
-	const downBtn = document.querySelector("#downImage" + _i);
+function clickEdit(event) {
+	const downBtn = document.querySelector("#downImage");
 	const btn = event.target;
 	const li = btn.parentNode.parentNode.parentNode.parentNode;
 
 	if (downBtn.classList.contains("hidden")) {
-		resetData(_i);
-		clickSlide(_i);
-		loadPlan(_i, event);
+		resetData();
+		clickSlide();
+		loadPlan(event);
 	} else {
 		if (index.value == li.id) {
-			resetData(_i);
-			clickSlide(_i);
+			resetData();
+			clickSlide();
 		} else {
-			resetData(_i);
-			loadPlan(_i, event);
+			resetData();
+			loadPlan(event);
 		}
 	}
 }
 
-function deletePlan(_i, event) {
+function deletePlan(event) {
 	const btn = event.target;
 	const li = btn.parentNode.parentNode.parentNode.parentNode;
-	toDoList1.removeChild(li);
+	toDoList.removeChild(li);
 	const cleanToDos = toDos.filter(function (toDo) {
 		return toDo.id !== parseInt(li.id);
 	});
@@ -402,18 +403,17 @@ function deletePlan(_i, event) {
 	saveToDos();
 }
 
-const todolist = document.querySelector("#todolist1");
-const addForm1 = document.querySelector("#addForm" + 1);
-const addButton1 = document.querySelector("#addButton" + 1);
-const toDoInput = addForm1.querySelector("input");
-const toDoTextarea = addForm1.querySelector("textarea");
-const important = addForm1.querySelector("#important" + 1);
-const index = addForm1.querySelector("#index" + 1);
-const toDoList1 = document.querySelector("#todolist" + 1);
+const todolist = document.querySelector("#todolist");
+const addForm = document.querySelector("#addForm");
+const addButton = document.querySelector("#addButton");
+const toDoInput = addForm.querySelector("input");
+const toDoTextarea = addForm.querySelector("textarea");
+const important = addForm.querySelector("#important");
+const index = addForm.querySelector("#index");
+const toDoList = document.querySelector("#todolist");
 const TODOS_LS = "toDos";
 let loadedToDos = localStorage.getItem(TODOS_LS);
 let parsedToDos = JSON.parse(loadedToDos);
-
 let toDos = [];
 if (parsedToDos != null) {
 	parsedToDos.forEach(function (toDo) {
@@ -422,19 +422,17 @@ if (parsedToDos != null) {
 }
 
 /* submit */
-function handleAddSubmit(i, event) {
-	// const addForm = document.querySelector("#addForm" + index);
+function handleAddSubmit(event) {
 	event.preventDefault();
-	const currentPlanTitleValue = document.querySelector("#titleInput" + i).value;
-	const currentPlanContentValue = document.querySelector("#contentInput" + i)
-		.value;
-	const currentImportantValue = document.querySelector("#important" + i).value;
+	const currentPlanTitleValue = document.querySelector("#titleInput").value;
+	const currentPlanContentValue = document.querySelector("#contentInput").value;
+	const currentImportantValue = document.querySelector("#important").value;
 	addPlan(
 		currentPlanTitleValue,
 		currentPlanContentValue,
 		currentImportantValue
 	);
-	resetData(i);
+	resetData();
 }
 
 function saveToDos() {
@@ -464,8 +462,8 @@ function loadToDos() {
 function init() {
 	loadToDos();
 	setToday();
-	addButton1.addEventListener("click", (event) => {
-		handleAddSubmit(1, event);
+	addButton.addEventListener("click", (event) => {
+		handleAddSubmit(event);
 	});
 }
 

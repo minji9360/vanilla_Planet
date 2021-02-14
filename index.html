@@ -26,35 +26,34 @@
                     </div>
                 </div>
                 <div class="todolist-box">
-                    <ul class="todolist" id="todolist1">
+                    <ul class="todolist" id="todolist">
                     </ul>
                 </div>
-                <form class="add-form" id="addForm1" autocomplete="off">
-                    <div class="title" id="titleBox1">
-                        <a type="button" class="option__button" onclick="clickSlide(1)">
-                            <img class="slide__image" id="upImage1" alt="Slide Up" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAABuElEQVRoge2YsU7CQACGfwo1qQxqKR1M9AUcCFEYiD6Jg4kTgxLdQV8AFFc1+kaQFE1gYnDUEB1MoUc5pyYIBXptL6fJfVNz7fW+j/Y6kKCUJoCvTfxLNj5TADSCtYFolTCoQFoRLREVGSAaGSAaGSAaGSAaGSAaGSAargGdnoVOz+K5BFK8btzpWWg8NEApxcXpJfJ7eS7rcHkCnrxDHJAxQfPpFu3XNo+l4g+YlvfgGRFrgJ+8B6+I2AKWyXvwiIglwOqulveIOyJygNW1cPPoL2/oWRh6dm6cjAnunpuxfGIjBSyTz2wZqJ5VcV25gpkx5847xEH9vh75SYQOWCVfO6/BzJi/jmeJ43UKFRBUftmYR9QI5gBW+SDnokQwBYSVD3JN2AimgNFoCHfizo0benbhZp3F29x+Xyd34sIe2ixKbAGFXBGVkwqSyWQgoUX4BSuKgvJxGaX9EosS+x6Yjgjy2ixieq4nf3hwxHyfBKV0ncD+Zp3Yemlhd3uH6Zf342Pwjv5bH4VckXmuCi0dOuAvoEKTf68LRwaIRgaIRgaIRgaIRgaIRgaIJgXAVuHookXCodk/xs/7eHgWzBAAAAAASUVORK5CYII=">
-                            <img class="slide__image hidden" id="downImage1" alt = "Slide Down" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAABPElEQVRIie2WvU7CUBiGn0OrsfUCMJawuOhFODh5D4I7rRfg4KpXQOxGxOBi/GHVySibzgSMgYnBUWwLQw/WQSEGyk9NuijvdJKT8zw53/fl5AjXb28nCLaIIR+IO1UQbAaC/TgEIghkIg7wz8wF/1ngdTzKt2V86Y897Euf65srHNeJJnA9F7t0zMPjPYXzQqhE9iSnl0UqTxXypTzvTnt2gaIoqKoKwHOzPiKRPUnx4oTqSxWARWUBVVFnF2hLGrmMSXo1PSIZhhtJAytroevLoQLh+W+HCA7CNrvdDvaZTeu1BcD62gYA9UYNgNRKCitroWl6KJyAo4lTpGk61u7e4Cb1Rm0AN5IGZsYcD//O1DEdLlcfPqkskQTDkihwgPDWj5Ps5L7WU8ryK0FUcD9/+C2aC/oRcX9bPgF+W3wwgGZDMQAAAABJRU5ErkJggg==">
+                <form class="add-form" id="addForm" autocomplete="off">
+                    <div class="title" id="titleBox">
+                        <a type="button" class="option__button" onclick="clickSlide()">
+                            <img class="slide__image" id="upImage" alt="Slide Up" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAABuElEQVRoge2YsU7CQACGfwo1qQxqKR1M9AUcCFEYiD6Jg4kTgxLdQV8AFFc1+kaQFE1gYnDUEB1MoUc5pyYIBXptL6fJfVNz7fW+j/Y6kKCUJoCvTfxLNj5TADSCtYFolTCoQFoRLREVGSAaGSAaGSAaGSAaGSAaGSAargGdnoVOz+K5BFK8btzpWWg8NEApxcXpJfJ7eS7rcHkCnrxDHJAxQfPpFu3XNo+l4g+YlvfgGRFrgJ+8B6+I2AKWyXvwiIglwOqulveIOyJygNW1cPPoL2/oWRh6dm6cjAnunpuxfGIjBSyTz2wZqJ5VcV25gpkx5847xEH9vh75SYQOWCVfO6/BzJi/jmeJ43UKFRBUftmYR9QI5gBW+SDnokQwBYSVD3JN2AimgNFoCHfizo0benbhZp3F29x+Xyd34sIe2ixKbAGFXBGVkwqSyWQgoUX4BSuKgvJxGaX9EosS+x6Yjgjy2ixieq4nf3hwxHyfBKV0ncD+Zp3Yemlhd3uH6Zf342Pwjv5bH4VckXmuCi0dOuAvoEKTf68LRwaIRgaIRgaIRgaIRgaIRgaIJgXAVuHookXCodk/xs/7eHgWzBAAAAAASUVORK5CYII=">
+                            <img class="slide__image hidden" id="downImage" alt="Slide Down" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAABPElEQVRIie2WvU7CUBiGn0OrsfUCMJawuOhFODh5D4I7rRfg4KpXQOxGxOBi/GHVySibzgSMgYnBUWwLQw/WQSEGyk9NuijvdJKT8zw53/fl5AjXb28nCLaIIR+IO1UQbAaC/TgEIghkIg7wz8wF/1ngdTzKt2V86Y897Euf65srHNeJJnA9F7t0zMPjPYXzQqhE9iSnl0UqTxXypTzvTnt2gaIoqKoKwHOzPiKRPUnx4oTqSxWARWUBVVFnF2hLGrmMSXo1PSIZhhtJAytroevLoQLh+W+HCA7CNrvdDvaZTeu1BcD62gYA9UYNgNRKCitroWl6KJyAo4lTpGk61u7e4Cb1Rm0AN5IGZsYcD//O1DEdLlcfPqkskQTDkihwgPDWj5Ps5L7WU8ryK0FUcD9/+C2aC/oRcX9bPgF+W3wwgGZDMQAAAABJRU5ErkJggg==">
                         </a>
-                        <input type="text" class="title__input" id="titleInput1" placeholder="할 일" required>
+                        <input type="text" class="title__input" id="titleInput" placeholder="할 일" required>
                         <div class="title-plan">
-                            <button class="add-title__button" id="addButton1">추가</button>
+                            <button class="add-title__button" id="addButton">추가</button>
                             <button class="edit-check__button hidden">수정</button>
                         </div>
                     </div>
-                    <div class="detail" id="detailBox1">
-                        <textarea class="detail__textarea" name="content" id="contentInput1" cols="30" rows="10" placeholder="상세 내용을 입력해주세요">
-                        </textarea>
-                        <button class="feedback-delete__button hidden" id="deleteFeedbackButton1" formaction="">삭제</button> 
+                    <div class="detail" id="detailBox">
+                        <textarea class="detail__textarea" name="content" id="contentInput" cols="30" rows="10" placeholder="상세 내용을 입력해주세요"></textarea>
+                        <button class="feedback-delete__button hidden" id="deleteFeedbackButton" formaction="">삭제</button> 
                         <div class="detail-buttons">
-                            <div class="plan-buttons" id="planButtons1">
-                                <label for="important1" id="importantButton1" onclick="updateImportant(1)">
-                                    <img class="gray__button" id="importantGray1" alt="important" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAACMUlEQVRIie2WP2/TQBjGf6/tkoXOoDREIBBjFn8IBJVoOjGAkAiJlQ0mRv59iCiJowqpWSvUNv0QDPGAWLpUlVpFsFXtCn4ZYgnLtc+XCMHSR7Js6x49v3vv7LuDK/0jia0xCIK6iGwA66p6G6glTacicqyqE8/zdnu93slfAXe73bU4jt8CLwG3xB4DO47jvOn3+8dLg4MgaALbwPWyDmZ0oarPwjDcKzIUVtDpdF6JyBZQWRAKUBGRJ77vn02n0y95htyKk0p3AGcJaFqxqm7mVX4puN1u15gPbyFURKbD4VCGw6GIyNQAdkRk3Gq1qqVgx3E+UjKnqrqSer5m8gKrnud9MIKDIKgDz0uCANKwlULXH71IRjIfDDQp/2Wy4LKKAVzHcTZM4IcWIcuAUdVHJvA9S3B6eK3AInLXBL5pCV50jgHWTGBbLVwx8+W0EDyzDFl4jrPZXqbxCLhvAw6CQC2BAKjqUfo9W/HBImGLSEQmhWDP83aBX5ZZ35PLRj/jON4vBPd6vRNV/WQR9LVard4C6sA3C//WaDQ6LQQDuK77DrgoCZLZbGZ7ejkH3l8KyHN2Op3HIvI5r2Mp/UjuNwyeWESag8FgP9uQuy5HUXTo+/4Z8KCoc8x3MNMuFovI68FgsJ3XaByupPIxsGry5ehcVZ+GYTgpMhh3oiiKDhuNxsh13QrgU77SxcAYaIZhGJmM1sfbdrtdS7a2deAOqeNtsjgcqOpe9uu90n/Xb7Sqn2YVBSnpAAAAAElFTkSuQmCC">
-                                    <img class="color__button hidden" id="importantColor1" alt="important" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAACMUlEQVRIie2WTWsTURSGnzPTFKIJLiPJJCgVce8vaCoULZi4VgRx78fGpV8/wR8gQrsNpWm6aW3zC7oR1yGQNOhOOoFsMve4aILpdD5uguimLwzMZd55n3Pu3Jm5cKl/JLE1HhSzFcdxawobAjdAvUlEX6Er0BqbYGd9MOr9FfChly0p7luB54CbYjcIDcdderPa/dVdGPy1nK+L6iaQSyswJF9EnlR7fjPO4MRCvasvRbWxABQgr6rbR17uRZwhsuNJp42kwixlRORRVOcXgtulrDeZ3gSoHK/1h7LWHwrIcQLYUdWt/fKVYirY4HwkdXo1M3O+nOwl76rzIRF8UMxWEHmaEgQwC8vEuv7oWbuU9WLBruPWSX9lwuC0jgHcwHFrsWCQ+xYhi4ARlQexYEVvWWH13PRagUFXYsHAdasMmfsZA5SSwLaaZ1VPZZLAA8uQGZjYgs9lL80OBOkoetsGfOjl1BI4Te/MjsKLa2++sHm42ooFj02wAwSWUT8mh43Gjgl2Y8Hrg1FP0C8WQd+c/rB8rTCsAN/TzAqfV09G/Vjwmcm8A/yULMnftd69nC675v2FgCjnUTn/UFW3owqbqfDnJKGQADUYqa8N/N3whcjgas9vCrwm9O6FSi6kQuFVFPTs9gRNOt8C8km+CJ2qyuN7J34rzpD45ar2/GZmzIrCJ2BsATQgmxnX3EmCwhzb23Yp6wWOWxOVDdCbwPT/2gfpiOiemKAZXr2X+u/6DQSXs23GS0N3AAAAAElFTkSuQmCC">
+                            <div class="plan-buttons" id="planButtons">
+                                <label for="important" id="importantButton" onclick="updateImportant()">
+                                    <img class="gray__button" id="importantGray" alt="important" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAACMUlEQVRIie2WP2/TQBjGf6/tkoXOoDREIBBjFn8IBJVoOjGAkAiJlQ0mRv59iCiJowqpWSvUNv0QDPGAWLpUlVpFsFXtCn4ZYgnLtc+XCMHSR7Js6x49v3vv7LuDK/0jia0xCIK6iGwA66p6G6glTacicqyqE8/zdnu93slfAXe73bU4jt8CLwG3xB4DO47jvOn3+8dLg4MgaALbwPWyDmZ0oarPwjDcKzIUVtDpdF6JyBZQWRAKUBGRJ77vn02n0y95htyKk0p3AGcJaFqxqm7mVX4puN1u15gPbyFURKbD4VCGw6GIyNQAdkRk3Gq1qqVgx3E+UjKnqrqSer5m8gKrnud9MIKDIKgDz0uCANKwlULXH71IRjIfDDQp/2Wy4LKKAVzHcTZM4IcWIcuAUdVHJvA9S3B6eK3AInLXBL5pCV50jgHWTGBbLVwx8+W0EDyzDFl4jrPZXqbxCLhvAw6CQC2BAKjqUfo9W/HBImGLSEQmhWDP83aBX5ZZ35PLRj/jON4vBPd6vRNV/WQR9LVard4C6sA3C//WaDQ6LQQDuK77DrgoCZLZbGZ7ejkH3l8KyHN2Op3HIvI5r2Mp/UjuNwyeWESag8FgP9uQuy5HUXTo+/4Z8KCoc8x3MNMuFovI68FgsJ3XaByupPIxsGry5ehcVZ+GYTgpMhh3oiiKDhuNxsh13QrgU77SxcAYaIZhGJmM1sfbdrtdS7a2deAOqeNtsjgcqOpe9uu90n/Xb7Sqn2YVBSnpAAAAAElFTkSuQmCC">
+                                    <img class="color__button hidden" id="importantColor" alt="important" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAACMUlEQVRIie2WTWsTURSGnzPTFKIJLiPJJCgVce8vaCoULZi4VgRx78fGpV8/wR8gQrsNpWm6aW3zC7oR1yGQNOhOOoFsMve4aILpdD5uguimLwzMZd55n3Pu3Jm5cKl/JLE1HhSzFcdxawobAjdAvUlEX6Er0BqbYGd9MOr9FfChly0p7luB54CbYjcIDcdderPa/dVdGPy1nK+L6iaQSyswJF9EnlR7fjPO4MRCvasvRbWxABQgr6rbR17uRZwhsuNJp42kwixlRORRVOcXgtulrDeZ3gSoHK/1h7LWHwrIcQLYUdWt/fKVYirY4HwkdXo1M3O+nOwl76rzIRF8UMxWEHmaEgQwC8vEuv7oWbuU9WLBruPWSX9lwuC0jgHcwHFrsWCQ+xYhi4ARlQexYEVvWWH13PRagUFXYsHAdasMmfsZA5SSwLaaZ1VPZZLAA8uQGZjYgs9lL80OBOkoetsGfOjl1BI4Te/MjsKLa2++sHm42ooFj02wAwSWUT8mh43Gjgl2Y8Hrg1FP0C8WQd+c/rB8rTCsAN/TzAqfV09G/Vjwmcm8A/yULMnftd69nC675v2FgCjnUTn/UFW3owqbqfDnJKGQADUYqa8N/N3whcjgas9vCrwm9O6FSi6kQuFVFPTs9gRNOt8C8km+CJ2qyuN7J34rzpD45ar2/GZmzIrCJ2BsATQgmxnX3EmCwhzb23Yp6wWOWxOVDdCbwPT/2gfpiOiemKAZXr2X+u/6DQSXs23GS0N3AAAAAElFTkSuQmCC">
                                     중요
                                 </label>
                             </div>
-                            <input class="hidden" type="checkbox" name="import" id="important1" value="false">
-                            <input type="hidden" name="index" id="index1">
+                            <input class="hidden" type="checkbox" name="import" id="important" value="false">
+                            <input type="hidden" name="index" id="index">
                         </div>
                     </div>
                 </form>
