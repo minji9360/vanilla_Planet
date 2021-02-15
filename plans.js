@@ -206,22 +206,7 @@ function checkPlan(event) {
 	}
 	toDos.splice(checkToDos.id, 1, checkToDos);
 	saveToDos();
-
-	/* reload something to changed list */
-	const erase = new Promise((resolve) => {
-		setTimeout(function () {
-			resolve(eraseAll(todolist));
-		}, 300);
-	});
-	const load = new Promise((resolve) => {
-		setTimeout(function () {
-			resolve(loadToDos());
-		}, 300);
-	});
-	const allPromise = Promise.all([erase, load]);
-	allPromise.catch((reason) =>
-		console.log("Check Plan Promise Error : " + reason)
-	);
+	reloadList();
 }
 
 /* erase all of to do list */
@@ -451,6 +436,47 @@ function handleAddSubmit(event) {
 	resetData();
 }
 
+function editPlan(event) {
+	loadedToDos = localStorage.getItem(TODOS_LS);
+	parsedToDos = JSON.parse(loadedToDos);
+	const btn = event.target;
+	const li = btn.parentNode.parentNode.parentNode;
+	let checkToDos = parsedToDos.find(function (toDo) {
+		console.log(toDo);
+		return toDo.id == parseInt(li.querySelector("#index").value);
+	});
+	checkToDos.title = toDoInput.value;
+	checkToDos.content = toDoTextarea.value;
+	checkToDos.important = important.value;
+	toDos.splice(checkToDos.id, 1, checkToDos);
+	saveToDos();
+	reloadList();
+}
+
+function reloadList() {
+	/* reload something to changed list */
+	const erase = new Promise((resolve) => {
+		setTimeout(function () {
+			resolve(eraseAll(todolist));
+		}, 300);
+	});
+	const load = new Promise((resolve) => {
+		setTimeout(function () {
+			resolve(loadToDos());
+		}, 300);
+	});
+	const allPromise = Promise.all([erase, load]);
+	allPromise.catch((reason) =>
+		console.log("Check Plan Promise Error : " + reason)
+	);
+}
+
+function handleEditSubmit(event) {
+	event.preventDefault();
+	editPlan(event);
+	resetData();
+}
+
 function saveToDos() {
 	localStorage.setItem(TODOS_LS, JSON.stringify(toDos));
 }
@@ -480,6 +506,9 @@ function init() {
 	setToday();
 	addSubmitButton.addEventListener("click", (event) => {
 		handleAddSubmit(event);
+	});
+	editSubmitButton.addEventListener("click", (event) => {
+		handleEditSubmit(event);
 	});
 }
 
