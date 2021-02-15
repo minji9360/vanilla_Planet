@@ -1,3 +1,23 @@
+const todolist = document.querySelector("#todolist");
+const addForm = document.querySelector("#addForm");
+const addSubmitButton = document.querySelector("#addButton");
+const editSubmitButton = document.querySelector("#editButton");
+const toDoInput = addForm.querySelector("input");
+const toDoTextarea = addForm.querySelector("textarea");
+const important = addForm.querySelector("#important");
+const index = addForm.querySelector("#index");
+const TODOS_LS = "toDos";
+
+let loadedToDos = localStorage.getItem(TODOS_LS);
+let parsedToDos = JSON.parse(loadedToDos);
+let toDos = [];
+
+if (parsedToDos != null) {
+	parsedToDos.forEach(function (toDo) {
+		toDos.push(toDo);
+	});
+}
+
 function setToday() {
 	const title = document.querySelector(".title__date");
 	const titleDate = title.querySelector(".date");
@@ -12,6 +32,7 @@ function setToday() {
 	titleDay.innerText = days[day] + "요일";
 }
 
+/* slide */
 function slidePlanDetail(event) {
 	const btn = event.target;
 	const li = btn.parentNode.parentNode.parentNode;
@@ -23,157 +44,6 @@ function slidePlanDetail(event) {
 	downButton.classList.toggle("hidden");
 	upButton.classList.toggle("hidden");
 	content.classList.toggle("hidden");
-}
-
-/* data */
-function updateImportant() {
-	const grayButton = document.querySelector("#importantGray");
-	const colorButton = document.querySelector("#importantColor");
-
-	if (important.checked === true) {
-		important.value = false;
-		changeBtn(colorButton, grayButton);
-	} else {
-		important.value = true;
-		changeBtn(grayButton, colorButton);
-	}
-}
-
-function loadImportant() {
-	const grayButton = document.querySelector("#importantGray");
-	const colorButton = document.querySelector("#importantColor");
-
-	if (important.value === "true") {
-		important.checked = true;
-		changeBtn(grayButton, colorButton);
-	} else {
-		important.checked = false;
-		changeBtn(colorButton, grayButton);
-	}
-}
-
-function resetData() {
-	const title = document.querySelector("#titleInput");
-	const content = document.querySelector("#contentInput");
-
-	title.value = "";
-	content.value = "";
-	index.value = "";
-	important.value = false;
-
-	loadImportant();
-}
-
-/* change button */
-function changeBtn(hiddenButton, shownButton) {
-	hiddenButton.classList.add("hidden");
-	shownButton.classList.remove("hidden");
-}
-
-function hideButtons() {
-	const planButtons = document.querySelector("#planButtons");
-	const sentence = document.querySelector("#sentenceButton");
-	const rating = document.querySelector("#rating");
-	// const addComment = document.querySelector("#addCommentButton" + i);
-	// const editComment = document.querySelector("#editCommentButton" + i);
-	const addSentence = document.querySelector("#contentButton");
-	const editSentence = document.querySelector("#editSentenceButton");
-	// const deleteComment = document.querySelector("#deleteCommentButton" + i);
-
-	planButtons.classList.add("hidden");
-	sentence.classList.add("hidden");
-	rating.classList.add("hidden");
-	addSubmitButton.classList.add("hidden");
-	// editSubmitButton.classList.add("hidden");
-	// addComment.classList.add("hidden");
-	// editComment.classList.add("hidden");
-	addSentence.classList.add("hidden");
-	editSentence.classList.add("hidden");
-	// deleteComment.classList.add("hidden");
-}
-
-function showButtons(type) {
-	const planButtons = document.querySelector("#planButtons");
-	// const sentences = document.querySelector("#sentenceButtons" + i);
-	const sentence = document.querySelector("#sentenceButton");
-	const rating = document.querySelector("#rating");
-	const addSubmitButton = document.querySelector("#addButton");
-	const editPlan = document.querySelector("#editButton");
-	// const addComment = document.querySelector("#addCommentButton" + i);
-	// const editComment = document.querySelector("#editCommentButton" + i);
-	const addSentence = document.querySelector("#contentButton");
-	const editSentence = document.querySelector("#editSentenceButton");
-	// const deleteComment = document.querySelector("#deleteCommentButton" + i);
-
-	if (type === "addPlan") {
-		addSubmitButton.disabled = false;
-		addSubmitButton.classList.remove("hidden");
-		planButtons.classList.remove("hidden");
-		sentence.classList.remove("hidden");
-	} else if (type === "editPlan") {
-		addSubmitButton.disabled = true;
-		editPlan.classList.remove("hidden");
-		planButtons.classList.remove("hidden");
-	} else if (type === "addSentence") {
-		addSubmitButton.disabled = true;
-		// sentences.classList.remove("hidden");
-		sentence.classList.remove("hidden");
-		addSentence.classList.remove("hidden");
-	} else if (type === "editSentence") {
-		addSubmitButton.disabled = true;
-		// sentences.classList.remove("hidden");
-		sentence.classList.remove("hidden");
-		editSentence.classList.remove("hidden");
-	} else if (type === "addFeedback") {
-		addSubmitButton.disabled = true;
-		// addComment.classList.remove("hidden");
-		rating.classList.remove("hidden");
-	} else if (type === "editFeedback") {
-		addSubmitButton.disabled = true;
-		// editComment.classList.remove("hidden");
-		// deleteComment.classList.remove("hidden");
-		rating.classList.remove("hidden");
-	}
-}
-
-/* click button */
-function clickSentence() {
-	const grayButton = document.querySelector("#sentenceGray");
-	const colorButton = document.querySelector("#sentenceColor");
-	const dailyGrayButton = document.querySelector("#dailyGray");
-	const dailyColorButton = document.querySelector("#dailyColor");
-	const goalGrayButton = document.querySelector("#goalGray");
-	const goalColorButton = document.querySelector("#goalColor");
-	const titleBox = document.querySelector("#titleBox");
-	const title = document.querySelector("#titleInput");
-	const contentInput = document.querySelector("#contentInput");
-
-	hideButtons();
-	if (colorButton.classList.contains("hidden")) {
-		changeBtn(grayButton, colorButton);
-		// changeBtn(dailyGrayButton, dailyColorButton);
-		// changeBtn(goalColorButton, goalGrayButton);
-		// resetData(i);
-		// changeListHeight("sentence", i);
-		title.required = false;
-		titleBox.classList.add("hidden");
-		showButtons("addSentence");
-		contentInput.placeholder = "명언이나 목표를 작성해주세요.";
-
-		// if (sentence === undefined) {
-		// } else {
-		// 	loadSentence(i, sentence);
-		// 	showButtons("editSentence", i);
-		// }
-	} else {
-		changeBtn(colorButton, grayButton);
-		resetData();
-		showButtons("addPlan");
-		// changeListHeight("title", i);
-		title.required = true;
-		titleBox.classList.remove("hidden");
-		contentInput.placeholder = "상세 내용을 입력해주세요.";
-	}
 }
 
 function clickSlide() {
@@ -189,6 +59,63 @@ function clickSlide() {
 	todolist.classList.toggle("content");
 }
 
+/* update data */
+function updateImportant() {
+	const grayButton = document.querySelector("#importantGray");
+	const colorButton = document.querySelector("#importantColor");
+
+	if (important.checked === true) {
+		important.value = false;
+		changeBtn(colorButton, grayButton);
+	} else {
+		important.value = true;
+		changeBtn(grayButton, colorButton);
+	}
+}
+
+function addPlan(title, content, important) {
+	if (title != "") {
+		const newId = toDos[toDos.length - 1] ? toDos[toDos.length - 1].id + 1 : 0;
+		const toDoObj = {
+			id: newId,
+			title: title,
+			content: content,
+			important: important,
+			complete: false,
+		};
+		toDos.push(toDoObj);
+		saveToDos();
+		paintPlan(
+			toDoObj.id,
+			toDoObj.title,
+			toDoObj.content,
+			toDoObj.important,
+			toDoObj.complete
+		);
+	} else alert("할 일을 입력해주세요.");
+}
+
+function editPlan(event) {
+	loadedToDos = localStorage.getItem(TODOS_LS);
+	parsedToDos = JSON.parse(loadedToDos);
+
+	const btn = event.target;
+	const li = btn.parentNode.parentNode.parentNode;
+	let checkToDos = parsedToDos.find(function (toDo) {
+		return toDo.id == parseInt(li.querySelector("#index").value);
+	});
+	let checkToDosIndex = parsedToDos.findIndex(function (toDo) {
+		return toDo.id == parseInt(li.querySelector("#index").value);
+	});
+
+	checkToDos.title = toDoInput.value;
+	checkToDos.content = toDoTextarea.value;
+	checkToDos.important = important.value;
+	toDos.splice(checkToDosIndex, 1, checkToDos);
+	saveToDos();
+	reloadList();
+}
+
 function checkPlan(event) {
 	const btn = event.target;
 	const li = btn.parentNode;
@@ -198,6 +125,7 @@ function checkPlan(event) {
 	let checkToDosIndex = parsedToDos.findIndex(function (toDo) {
 		return toDo.id == parseInt(li.id);
 	});
+
 	/* change data about complete option and save changed data */
 	if (checkToDos.complete == true) {
 		checkToDos.complete = false;
@@ -209,12 +137,181 @@ function checkPlan(event) {
 	reloadList();
 }
 
+function deletePlan(event) {
+	const btn = event.target;
+	const li = btn.parentNode.parentNode.parentNode.parentNode;
+	const cleanToDos = toDos.filter(function (toDo) {
+		return toDo.id !== parseInt(li.id);
+	});
+
+	toDos = cleanToDos;
+	if (index.value == li.id) {
+		resetData();
+		changeBtn(editSubmitButton, addSubmitButton);
+	}
+	saveToDos();
+	reloadList();
+}
+
+function saveToDos() {
+	localStorage.setItem(TODOS_LS, JSON.stringify(toDos));
+}
+
+function resetData() {
+	toDoInput.value = "";
+	toDoTextarea.value = "";
+	index.value = "";
+	important.value = false;
+	loadImportant();
+}
+
+/* load data */
+function loadImportant() {
+	const grayButton = document.querySelector("#importantGray");
+	const colorButton = document.querySelector("#importantColor");
+
+	if (important.value === "true") {
+		important.checked = true;
+		changeBtn(grayButton, colorButton);
+	} else {
+		important.checked = false;
+		changeBtn(colorButton, grayButton);
+	}
+}
+
+function loadPlan(event) {
+	const btn = event.target;
+	const li = btn.parentNode.parentNode.parentNode.parentNode;
+	const span = li.querySelector("span");
+
+	toDoInput.value = span.innerText;
+	index.value = li.id;
+	if (span.classList.contains("important")) {
+		important.value = true;
+		loadImportant();
+	}
+	if (document.querySelector("#content" + li.id)) {
+		toDoTextarea.value = document
+			.querySelector("#content" + li.id)
+			.innerHTML.replace('<span class="plan-detail__span">', "")
+			.replace("</span>", "")
+			.replaceAll("<br>", "\r\n");
+	}
+}
+
+function loadToDos() {
+	loadedToDos = localStorage.getItem(TODOS_LS);
+	parsedToDos = JSON.parse(loadedToDos);
+	if (loadedToDos !== null) {
+		parsedToDos.forEach(function (toDo) {
+			if (toDo != null) {
+				paintPlan(
+					toDo.id,
+					toDo.title,
+					toDo.content,
+					toDo.important,
+					toDo.complete
+				);
+			}
+		});
+	} else {
+		console.log("Nothing to load!");
+	}
+}
+
+function reloadList() {
+	const erase = new Promise((resolve) => {
+		setTimeout(function () {
+			resolve(eraseAll(todolist));
+		}, 300);
+	});
+	const load = new Promise((resolve) => {
+		setTimeout(function () {
+			resolve(loadToDos());
+		}, 300);
+	});
+	const allPromise = Promise.all([erase, load]);
+
+	allPromise.catch((reason) =>
+		console.log("Check Plan Promise Error : " + reason)
+	);
+}
+
+/* change button */
+function changeBtn(hiddenButton, shownButton) {
+	hiddenButton.classList.add("hidden");
+	shownButton.classList.remove("hidden");
+}
+
+function hideButtons() {
+	const planButtons = document.querySelector("#planButtons");
+	const addSentence = document.querySelector("#contentButton");
+	const editSentence = document.querySelector("#editSentenceButton");
+
+	planButtons.classList.add("hidden");
+	addSubmitButton.classList.add("hidden");
+	addSentence.classList.add("hidden");
+	editSentence.classList.add("hidden");
+}
+
+function showButtons(type) {
+	const planButtons = document.querySelector("#planButtons");
+	const addSubmitButton = document.querySelector("#addButton");
+	const editPlan = document.querySelector("#editButton");
+	const addSentence = document.querySelector("#contentButton");
+	const editSentence = document.querySelector("#editSentenceButton");
+
+	if (type === "addPlan") {
+		addSubmitButton.disabled = false;
+		addSubmitButton.classList.remove("hidden");
+		planButtons.classList.remove("hidden");
+	} else if (type === "editPlan") {
+		addSubmitButton.disabled = true;
+		editPlan.classList.remove("hidden");
+		planButtons.classList.remove("hidden");
+	} else if (type === "addSentence") {
+		addSubmitButton.disabled = true;
+		addSentence.classList.remove("hidden");
+	} else if (type === "editSentence") {
+		addSubmitButton.disabled = true;
+		editSentence.classList.remove("hidden");
+	} else if (type === "addFeedback") {
+		addSubmitButton.disabled = true;
+	} else if (type === "editFeedback") {
+		addSubmitButton.disabled = true;
+	}
+}
+
+/* click button */
+function clickEdit(event) {
+	const downBtn = document.querySelector("#downImage");
+	const btn = event.target;
+	const li = btn.parentNode.parentNode.parentNode.parentNode;
+
+	if (downBtn.classList.contains("hidden")) {
+		resetData();
+		clickSlide();
+		loadPlan(event);
+		changeBtn(addSubmitButton, editSubmitButton);
+	} else {
+		if (index.value == li.id) {
+			resetData();
+			clickSlide();
+			changeBtn(editSubmitButton, addSubmitButton);
+		} else {
+			resetData();
+			loadPlan(event);
+			changeBtn(addSubmitButton, editSubmitButton);
+		}
+	}
+}
+
 /* erase all of to do list */
 function eraseAll(todolist) {
 	while (todolist.firstChild) todolist.removeChild(todolist.firstChild);
 }
 
-/* print all of to do list */
+/* print Plan */
 function paintPlan(id, title, content, important, complete) {
 	const li = document.createElement("li");
 	const checkBtn = document.createElement("input");
@@ -323,152 +420,19 @@ function paintPlan(id, title, content, important, complete) {
 	li.id = id;
 }
 
-function addPlan(title, content, important) {
-	if (title != "") {
-		const newId = toDos[toDos.length - 1] ? toDos[toDos.length - 1].id + 1 : 0;
-		const toDoObj = {
-			id: newId,
-			title: title,
-			content: content,
-			important: important,
-			complete: false,
-		};
-		toDos.push(toDoObj);
-		saveToDos();
-		paintPlan(
-			toDoObj.id,
-			toDoObj.title,
-			toDoObj.content,
-			toDoObj.important,
-			toDoObj.complete
-		);
-	} else alert("할 일을 입력해주세요.");
-}
-
-function loadPlan(event) {
-	const btn = event.target;
-	const li = btn.parentNode.parentNode.parentNode.parentNode;
-	const span = li.querySelector("span");
-
-	toDoInput.value = span.innerText;
-	index.value = li.id;
-	if (span.classList.contains("important")) {
-		important.value = true;
-		loadImportant();
-	}
-	if (document.querySelector("#content" + li.id)) {
-		toDoTextarea.value = document
-			.querySelector("#content" + li.id)
-			.innerHTML.replace('<span class="plan-detail__span">', "")
-			.replace("</span>", "")
-			.replaceAll("<br>", "\r\n");
-	}
-}
-
-function clickEdit(event) {
-	const downBtn = document.querySelector("#downImage");
-	const btn = event.target;
-	const li = btn.parentNode.parentNode.parentNode.parentNode;
-
-	if (downBtn.classList.contains("hidden")) {
-		resetData();
-		clickSlide();
-		loadPlan(event);
-		changeBtn(addSubmitButton, editSubmitButton);
-	} else {
-		if (index.value == li.id) {
-			resetData();
-			clickSlide();
-			changeBtn(editSubmitButton, addSubmitButton);
-		} else {
-			resetData();
-			loadPlan(event);
-			changeBtn(addSubmitButton, editSubmitButton);
-		}
-	}
-}
-
-function deletePlan(event) {
-	const btn = event.target;
-	const li = btn.parentNode.parentNode.parentNode.parentNode;
-	const cleanToDos = toDos.filter(function (toDo) {
-		return toDo.id !== parseInt(li.id);
-	});
-	toDos = cleanToDos;
-	if (index.value == li.id) {
-		resetData();
-		changeBtn(editSubmitButton, addSubmitButton);
-	}
-	saveToDos();
-	reloadList();
-}
-
-const todolist = document.querySelector("#todolist");
-const addForm = document.querySelector("#addForm");
-const addSubmitButton = document.querySelector("#addButton");
-const editSubmitButton = document.querySelector("#editButton");
-const toDoInput = addForm.querySelector("input");
-const toDoTextarea = addForm.querySelector("textarea");
-const important = addForm.querySelector("#important");
-const index = addForm.querySelector("#index");
-const TODOS_LS = "toDos";
-let loadedToDos = localStorage.getItem(TODOS_LS);
-let parsedToDos = JSON.parse(loadedToDos);
-let toDos = [];
-if (parsedToDos != null) {
-	parsedToDos.forEach(function (toDo) {
-		toDos.push(toDo);
-	});
-}
-
 /* submit */
 function handleAddSubmit(event) {
 	event.preventDefault();
-	const currentPlanTitleValue = document.querySelector("#titleInput").value;
-	const currentPlanContentValue = document.querySelector("#contentInput").value;
-	const currentImportantValue = document.querySelector("#important").value;
+	const currentPlanTitleValue = toDoInput.value;
+	const currentPlanContentValue = toDoTextarea.value;
+	const currentImportantValue = important.value;
+
 	addPlan(
 		currentPlanTitleValue,
 		currentPlanContentValue,
 		currentImportantValue
 	);
 	resetData();
-}
-
-function editPlan(event) {
-	loadedToDos = localStorage.getItem(TODOS_LS);
-	parsedToDos = JSON.parse(loadedToDos);
-	const btn = event.target;
-	const li = btn.parentNode.parentNode.parentNode;
-	let checkToDos = parsedToDos.find(function (toDo) {
-		return toDo.id == parseInt(li.querySelector("#index").value);
-	});
-	let checkToDosIndex = parsedToDos.findIndex(function (toDo) {
-		return toDo.id == parseInt(li.querySelector("#index").value);
-	});
-	checkToDos.title = toDoInput.value;
-	checkToDos.content = toDoTextarea.value;
-	checkToDos.important = important.value;
-	toDos.splice(checkToDosIndex, 1, checkToDos);
-	saveToDos();
-	reloadList();
-}
-
-function reloadList() {
-	const erase = new Promise((resolve) => {
-		setTimeout(function () {
-			resolve(eraseAll(todolist));
-		}, 300);
-	});
-	const load = new Promise((resolve) => {
-		setTimeout(function () {
-			resolve(loadToDos());
-		}, 300);
-	});
-	const allPromise = Promise.all([erase, load]);
-	allPromise.catch((reason) =>
-		console.log("Check Plan Promise Error : " + reason)
-	);
 }
 
 function handleEditSubmit(event) {
@@ -478,33 +442,9 @@ function handleEditSubmit(event) {
 	changeBtn(editSubmitButton, addSubmitButton);
 }
 
-function saveToDos() {
-	localStorage.setItem(TODOS_LS, JSON.stringify(toDos));
-}
-
-function loadToDos() {
-	loadedToDos = localStorage.getItem(TODOS_LS);
-	parsedToDos = JSON.parse(loadedToDos);
-	if (loadedToDos !== null) {
-		parsedToDos.forEach(function (toDo) {
-			if (toDo != null) {
-				paintPlan(
-					toDo.id,
-					toDo.title,
-					toDo.content,
-					toDo.important,
-					toDo.complete
-				);
-			}
-		});
-	} else {
-		console.log("Nothing to load!");
-	}
-}
-
 function init() {
-	loadToDos();
 	setToday();
+	loadToDos();
 	addSubmitButton.addEventListener("click", (event) => {
 		handleAddSubmit(event);
 	});
