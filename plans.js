@@ -192,19 +192,19 @@ function clickSlide() {
 function checkPlan(event) {
 	const btn = event.target;
 	const li = btn.parentNode;
-	loadedToDos = localStorage.getItem(TODOS_LS);
-	parsedToDos = JSON.parse(loadedToDos);
 	let checkToDos = parsedToDos.find(function (toDo) {
 		return toDo.id == parseInt(li.id);
 	});
-
+	let checkToDosIndex = parsedToDos.findIndex(function (toDo) {
+		return toDo.id == parseInt(li.id);
+	});
 	/* change data about complete option and save changed data */
 	if (checkToDos.complete == true) {
 		checkToDos.complete = false;
 	} else {
 		checkToDos.complete = true;
 	}
-	toDos.splice(checkToDos.id, 1, checkToDos);
+	toDos.splice(checkToDosIndex, 1, checkToDos);
 	saveToDos();
 	reloadList();
 }
@@ -332,7 +332,6 @@ function addPlan(title, content, important) {
 			content: content,
 			important: important,
 			complete: false,
-			feedback: {},
 		};
 		toDos.push(toDoObj);
 		saveToDos();
@@ -392,16 +391,16 @@ function clickEdit(event) {
 function deletePlan(event) {
 	const btn = event.target;
 	const li = btn.parentNode.parentNode.parentNode.parentNode;
-	const content = document.querySelector("#content" + li.id);
-	todolist.removeChild(li);
 	const cleanToDos = toDos.filter(function (toDo) {
 		return toDo.id !== parseInt(li.id);
 	});
-	if (content != null) {
-		todolist.removeChild(content);
-	}
 	toDos = cleanToDos;
+	if (index.value == li.id) {
+		resetData();
+		changeBtn(editSubmitButton, addSubmitButton);
+	}
 	saveToDos();
+	reloadList();
 }
 
 const todolist = document.querySelector("#todolist");
@@ -442,19 +441,20 @@ function editPlan(event) {
 	const btn = event.target;
 	const li = btn.parentNode.parentNode.parentNode;
 	let checkToDos = parsedToDos.find(function (toDo) {
-		console.log(toDo);
+		return toDo.id == parseInt(li.querySelector("#index").value);
+	});
+	let checkToDosIndex = parsedToDos.findIndex(function (toDo) {
 		return toDo.id == parseInt(li.querySelector("#index").value);
 	});
 	checkToDos.title = toDoInput.value;
 	checkToDos.content = toDoTextarea.value;
 	checkToDos.important = important.value;
-	toDos.splice(checkToDos.id, 1, checkToDos);
+	toDos.splice(checkToDosIndex, 1, checkToDos);
 	saveToDos();
 	reloadList();
 }
 
 function reloadList() {
-	/* reload something to changed list */
 	const erase = new Promise((resolve) => {
 		setTimeout(function () {
 			resolve(eraseAll(todolist));
@@ -475,6 +475,7 @@ function handleEditSubmit(event) {
 	event.preventDefault();
 	editPlan(event);
 	resetData();
+	changeBtn(editSubmitButton, addSubmitButton);
 }
 
 function saveToDos() {
